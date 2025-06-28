@@ -1,17 +1,29 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-vazir: var(--font-vazir);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-primary: #7673D5;
+    --color-secondary: #112B46;
+
+    --font-vazir: var(--font-vazir);
+
+    --shadow-menu: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+    background: var(--background);
+    color: var(--foreground);
+}
+
+#tsparticles {
+    canvas {
+        display: block;
+        vertical-align: bottom;
+    }
 }

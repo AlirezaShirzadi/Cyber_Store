@@ -1,5 +1,9 @@
+import Container from "@/components/Container/Container";
+
 export default function Home() {
     return (
-        <div className={`font-vazir text-2xl`}>علیرضا شیرزادی</div>
+        <Container>
+            <div className={`font-vazir text-2xl`}></div>
+        </Container>
     );
 }
