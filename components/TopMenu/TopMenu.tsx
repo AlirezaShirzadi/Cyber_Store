@@ -60,7 +60,14 @@ export default function TopMenu() {
                 className={`absolute z-30 flex items-center justify-between w-full rounded-[15px] top-[15px] shadow-menu bg-[#ffffffb3] py-[7.5px] px-[15px]`}>
                 {/* Logo - visible on all screen sizes */}
                 <a className={`flex items-center gap-x-3.5`} href={`/`}>
-                    <Image className={`w-[25px] h-[25px]`} src={`/logo.png`} alt={`logo`} width={25} height={25}/>
+                    <Image 
+                        className={`w-[25px] h-[25px]`} 
+                        src={`/logo.png`} 
+                        alt={`logo`} 
+                        width={25} 
+                        height={25}
+                        sizes="25px"
+                    />
                     <h1 className={`text-primary text-base font-medium`}>سایبر گیم‌استور</h1>
                 </a>
 
@@ -159,7 +166,14 @@ export default function TopMenu() {
                     {/* Drawer Header */}
                     <div className="flex justify-between items-center mb-6 pb-4 border-b">
                         <a className={`flex items-center gap-x-3.5`} href={`/`}>
-                            <Image className={`w-[25px] h-[25px]`} src={`/logo.png`} alt={`logo`} width={25} height={25}/>
+                            <Image 
+                                className={`w-[25px] h-[25px]`} 
+                                src={`/logo.png`} 
+                                alt={`logo`} 
+                                width={25} 
+                                height={25}
+                                sizes="25px"
+                            />
                             <h1 className={`text-primary text-base font-medium`}>سایبر گیم‌استور</h1>
                         </a>
                         <button onClick={toggleDrawer} className="text-gray-500">
