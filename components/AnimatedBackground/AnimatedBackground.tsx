@@ -25,7 +25,7 @@ const AnimatedBackground = () => {
                 particlesLoaded={particlesLoaded}
                 options={{
                     background: {
-                        color: "#fff"
+                        color: "#E1E4F9"
                     },
                     backgroundMode: {
                         enable: true

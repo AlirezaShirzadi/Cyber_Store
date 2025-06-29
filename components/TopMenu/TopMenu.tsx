@@ -57,7 +57,7 @@ export default function TopMenu() {
     return (
         <header className={`container mx-auto relative`}>
             <div
-                className={`absolute flex items-center justify-between w-full rounded-[15px] top-[15px] shadow-menu bg-[#ffffffb3] py-[7.5px] px-[15px]`}>
+                className={`absolute z-30 flex items-center justify-between w-full rounded-[15px] top-[15px] shadow-menu bg-[#ffffffb3] py-[7.5px] px-[15px]`}>
                 {/* Logo - visible on all screen sizes */}
                 <a className={`flex items-center gap-x-3.5`} href={`/`}>
                     <Image className={`w-[25px] h-[25px]`} src={`/logo.png`} alt={`logo`} width={25} height={25}/>

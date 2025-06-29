@@ -27,3 +27,26 @@ body {
         vertical-align: bottom;
     }
 }
+
+/* Swiper */
+.swiper-testimonial {
+    position: relative !important;
+    padding: 30px 0 !important;
+    .swiper-pagination {
+        position: absolute !important;
+        bottom: 0 !important;
+        .swiper-pagination-bullet {
+            width: 6px !important;
+            height: 6px !important;
+            border-radius: 50% !important;
+            background: var(--color-primary) !important;
+        }
+
+        .swiper-pagination-bullet-active {
+            width: 19px !important;
+            height: 6px !important;
+            border-radius: 9px !important;
+            background: var(--color-primary) !important;
+        }
+    }
+}
