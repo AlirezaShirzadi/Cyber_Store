@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import "./../globals.css";
 import TopMenu from "@/components/TopMenu/TopMenu";
 import AnimatedBackground from "@/components/AnimatedBackground/AnimatedBackground";
+import TanStackProvider from "@/services/TanStackProvider/QueryClientProvider";
 
 const Vazir = localFont({
     src: [
@@ -70,9 +71,13 @@ export default async function RootLayout({
             <body
                 className={`${Vazir.className} antialiased`}
             >
-                <AnimatedBackground />
-                <TopMenu/>
-                {children}
+                <TanStackProvider>
+                    <AnimatedBackground/>
+                    <TopMenu/>
+                    <main>
+                        {children}
+                    </main>
+                </TanStackProvider>
             </body>
         </html>
     );

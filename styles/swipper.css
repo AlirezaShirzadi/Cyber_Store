@@ -32,3 +32,46 @@
         bottom: 80px !important;
     }
 }
+
+.swiper-hero {
+    position: relative !important;
+    .swiper-pagination {
+        position: absolute !important;
+        bottom: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        column-gap: 25px !important;
+
+        .swiper-pagination-bullet {
+            width: 150px !important;
+            height: 200px !important;
+            background: none !important;
+            transition: all 0.3s ease-in-out !important;
+            img {
+                object-fit: cover !important;
+                height: 100% !important;
+            }
+        }
+
+        .swiper-pagination-bullet-active {
+            width: 200px !important;
+            height: 200px !important;
+            background: none !important;
+        }
+    }
+}
+
+.swiper-hero2 {
+    position: relative !important;
+}
+
+.swiper-hero1 {
+    display: flex !important;
+    justify-content: center !important;
+    padding: 20px 0 0 0 !important;
+    z-index: 20 !important;
+    img {
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+}
