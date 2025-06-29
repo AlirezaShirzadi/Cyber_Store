@@ -29,8 +29,6 @@ export default function TestimonialSlider() {
                 spaceBetween: 50
             }
         }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
     >
         <SwiperSlide>
             <div className={`border border-[#BBC1EF] rounded-3xl py-[13px] px-[14px] min-h-[143px]`}>
