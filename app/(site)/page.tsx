@@ -40,23 +40,43 @@ export default function Home() {
                         ما؟</h2>
                     <div className={`grid grid-cols-12 gap-6 max-w-[872px] mx-auto w-full`}>
                         <div className={`col-span-12 lg:col-span-6`}>
-                            <Image className={`w-full object-cover`} src={`/why/1.png`} alt={'why1'} width={424} height={308} />
+                            <Image className={`w-full object-cover`} src={`/why/1.png`} alt={'why1'} width={424}
+                                   height={308}/>
                         </div>
                         <div className={`col-span-12 lg:col-span-6`}>
-                            <Image className={`w-full object-cover`} src={`/why/2.png`} alt={'why2'} width={424} height={308} />
+                            <Image className={`w-full object-cover`} src={`/why/2.png`} alt={'why2'} width={424}
+                                   height={308}/>
                         </div>
                         <div className={`col-span-12 lg:col-span-6`}>
-                            <Image className={`w-full object-cover`} src={`/why/3.png`} alt={'why3'} width={424} height={308} />
+                            <Image className={`w-full object-cover`} src={`/why/3.png`} alt={'why3'} width={424}
+                                   height={308}/>
                         </div>
                         <div className={`col-span-12 lg:col-span-6`}>
-                            <Image className={`w-full object-cover`} src={`/why/4.png`} alt={'why4'} width={424} height={308} />
+                            <Image className={`w-full object-cover`} src={`/why/4.png`} alt={'why4'} width={424}
+                                   height={308}/>
                         </div>
                     </div>
                 </section>
             </Container>
 
-            <Container className={`pb-20`}>
-                <HeadsetSlider />
+            <Container>
+                <section className={`pb-20`}>
+                    <HeadsetSlider/>
+                </section>
+            </Container>
+
+            <Container className={`pb-[85px]`}>
+                <section className={`relative lg:pt-[83px] pb-18 bg-[#c1c2ef80] rounded-tr-[60px] rounded-bl-[30px]`}>
+                    <Image className={`absolute bottom-0 left-0`} src={'/robot.webp'} alt={'robot'} width={281} height={184} />
+                    <div className={`py-[180px] px-4 lg:px-24 text-center`}>
+                        <h2 className={`text-5xl/[52px] font-bold text-secondary mb-12`}>راهنمای خرید</h2>
+                        <div className={`text-secondary text-xl lg:text-xl/[75px]`}>
+                            <p>1. گیم مورد نظرت رو انتخاب کن</p>
+                            <p>2. از طریق درگاه بانکی پرداخت خودتون رو انجام بدید</p>
+                            <p>3. اطلاعات مربوط به اکانت خریداری شده رو تو تلگرامت پیگیری کن.</p>
+                        </div>
+                    </div>
+                </section>
             </Container>
         </>
     );
