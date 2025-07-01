@@ -3,6 +3,7 @@ import TestimonialSlider from "@/components/TestimonialSlider/TestimonialSlider"
 import StoreSlider from "@/components/StoreSlider/StoreSlider";
 import HeroSlider from "@/components/HeroSlider/HeroSlider";
 import Image from "next/image";
+import HeadsetSlider from "@/components/HeadsetSlider/HeadsetSlider";
 
 export default function Home() {
 
@@ -52,6 +53,10 @@ export default function Home() {
                         </div>
                     </div>
                 </section>
+            </Container>
+
+            <Container className={`pb-20`}>
+                <HeadsetSlider />
             </Container>
         </>
     );

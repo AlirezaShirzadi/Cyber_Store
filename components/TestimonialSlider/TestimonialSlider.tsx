@@ -1,6 +1,6 @@
 "use client";
 
-import {Navigation, Pagination, Scrollbar, A11y} from 'swiper/modules';
+import {Pagination, Scrollbar, A11y} from 'swiper/modules';
 import {Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/css';
@@ -10,9 +10,8 @@ import Image from "next/image";
 export default function TestimonialSlider() {
     return <Swiper
         className={`swiper-testimonial`}
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        modules={[Pagination, Scrollbar, A11y]}
         spaceBetween={50}
-        navigation
         pagination={{clickable: true}}
         scrollbar={{draggable: true}}
         breakpoints={{

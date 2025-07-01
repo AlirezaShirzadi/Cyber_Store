@@ -2,7 +2,7 @@
 
 import {useState} from "react";
 import Image from "next/image";
-import {FreeMode, Navigation, Thumbs} from 'swiper/modules';
+import {FreeMode, Thumbs} from 'swiper/modules';
 import {Swiper, SwiperSlide} from "swiper/react";
 
 import 'swiper/css';
@@ -19,9 +19,8 @@ export default function ClientHeroSlider({data}: ClientHeroSliderProps) {
             className={`swiper-hero2`}
             loop={true}
             spaceBetween={10}
-            navigation={true}
             thumbs={{swiper: thumbsSwiper}}
-            modules={[FreeMode, Navigation, Thumbs]}
+            modules={[FreeMode, Thumbs]}
         >
             {data?.map((item) => {
                 return <SwiperSlide key={'poster' + item.product_id}>
@@ -45,7 +44,7 @@ export default function ClientHeroSlider({data}: ClientHeroSliderProps) {
                 slidesPerView={'auto'}
                 freeMode={true}
                 watchSlidesProgress={true}
-                modules={[FreeMode, Navigation, Thumbs]}
+                modules={[FreeMode, Thumbs]}
                 className={`swiper-hero1`}
             >
                 {data?.map((item) => {
