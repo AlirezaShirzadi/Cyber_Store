@@ -7,6 +7,7 @@ import HeadsetSlider from "@/components/HeadsetSlider/HeadsetSlider";
 import React from "react";
 import Link from "next/link";
 import PlanSlider from "@/components/PlanSlider/PlanSlider";
+import BlogSlider from "@/components/BlogSlider/BlogSlider";
 
 export default function Home() {
 
@@ -281,6 +282,19 @@ export default function Home() {
             <Container>
                 <section className={`py-6 lg:py-[129px]`}>
                     <PlanSlider />
+                </section>
+            </Container>
+
+            <Container>
+                <section className={`pt-[76px] pb-[60px]`}>
+                    <h2 className={`text-5xl font-bold text-secondary text-center mb-[28px]`}>به‌روزترین اخبار دنیای سونی در سایبر گیم‌استور</h2>
+                    <p className={`text-lg text-[#3200AEBF] text-center mb-[28px]`}>تو بخش اخبار سایبر گیم‌استور، همیشه یه قدم جلوتر از دنیای سونی باش! ما به‌روزترین اخبار رو از بازی‌های جدید، آپدیت‌های کنسول‌های PS4 و PS5، رویدادهای ویژه و حتی شایعات هیجان‌انگیز براتون جمع‌آوری کردیم. اینجا هر گیمری می‌تونه سریع و ساده با آخرین اتفاقات دنیای سونی همراه بشه. خبرها رو بخون، نظرت رو بگو و با ما تو جریان باش</p>
+                    <BlogSlider />
+                    <div className="relative flex justify-center mt-[107px] mb-[31px]">
+                        <div className="absolute w-[600px] h-full rounded-full bg-primary opacity-70 blur-3xl z-0"></div>
+                        <Image className={`relative z-10`} src={`/ps5.png`} alt={`ps5`} width={480} height={320} />
+                    </div>
+                    <p className={`text-justify text-base`}>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</p>
                 </section>
             </Container>
         </>

@@ -18,7 +18,7 @@
     }
 }
 
-.swiper-testimonial, .swiper-plan  {
+.swiper-testimonial, .swiper-plan, .swiper-blog  {
     position: relative !important;
     padding: 30px 0 !important;
     .swiper-pagination {
