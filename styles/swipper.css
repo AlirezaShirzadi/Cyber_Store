@@ -18,7 +18,7 @@
     }
 }
 
-.swiper-testimonial {
+.swiper-testimonial, .swiper-plan  {
     position: relative !important;
     padding: 30px 0 !important;
     .swiper-pagination {
@@ -59,6 +59,10 @@
             background: none !important;
         }
     }
+}
+
+.swiper-plan {
+
 }
 
 .swiper-hero2 {

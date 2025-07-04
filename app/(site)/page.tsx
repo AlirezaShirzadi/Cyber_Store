@@ -6,13 +6,14 @@ import Image from "next/image";
 import HeadsetSlider from "@/components/HeadsetSlider/HeadsetSlider";
 import React from "react";
 import Link from "next/link";
+import PlanSlider from "@/components/PlanSlider/PlanSlider";
 
 export default function Home() {
 
     return (
         <>
             <Container>
-                <section className={`pb-[167px] pt-[197px]`}>
+                <section className={`pb-6 lg:pb-[167px] pt-[197px]`}>
                     <div className={`font-vazir`}>
                         <div className={`grid grid-cols-12 gap-6 items-center`}>
                             <div className={`col-span-12 lg:col-span-5 order-2 lg:order-1`}>
@@ -62,12 +63,12 @@ export default function Home() {
             </Container>
 
             <Container>
-                <section className={`pb-20`}>
+                <section className={`pb-6 lg:pb-20`}>
                     <HeadsetSlider/>
                 </section>
             </Container>
 
-            <Container className={`pb-[85px]`}>
+            <Container className={`pb-6 lg:pb-[85px]`}>
                 <section className={`relative lg:pt-[83px] pb-18 bg-[#c1c2ef80] rounded-tr-[60px] rounded-bl-[30px]`}>
                     <Image className={`absolute bottom-0 left-0`} src={'/robot.webp'} alt={'robot'} width={281}
                            height={184}/>
@@ -274,6 +275,12 @@ export default function Home() {
                     <Link href={`#`}
                           className={`inline-block py-4 px-[45px] bg-primary text-white rounded-[15px] lg:text-2xl/[116%] font-extrabold hover:bg-white hover:text-secondary transition-colors`}>رفتن
                         به فروشگاه</Link>
+                </section>
+            </Container>
+
+            <Container>
+                <section className={`py-6 lg:py-[129px]`}>
+                    <PlanSlider />
                 </section>
             </Container>
         </>
