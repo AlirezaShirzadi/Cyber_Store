@@ -8,6 +8,7 @@ import React from "react";
 import Link from "next/link";
 import PlanSlider from "@/components/PlanSlider/PlanSlider";
 import BlogSlider from "@/components/BlogSlider/BlogSlider";
+import ConsoleSlider from "@/components/ConsoleSlider/ConsoleSlider";
 
 export default function Home() {
 
@@ -73,8 +74,8 @@ export default function Home() {
                 <section className={`relative lg:pt-[83px] pb-18 bg-[#c1c2ef80] rounded-tr-[60px] rounded-bl-[30px]`}>
                     <Image className={`absolute bottom-0 left-0`} src={'/robot.webp'} alt={'robot'} width={281}
                            height={184}/>
-                    <div className={`py-[180px] px-4 lg:px-24 text-center`}>
-                        <h2 className={`text-5xl/[52px] font-bold text-secondary mb-12`}>راهنمای خرید</h2>
+                    <div className={`pt-12 pb-[170px] lg:py-[180px] px-4 lg:px-24 text-center`}>
+                        <h2 className={`text-3xl lg:text-5xl/[52px] font-bold text-secondary mb-12`}>راهنمای خرید</h2>
                         <div className={`text-secondary text-xl lg:text-xl/[75px]`}>
                             <p>1. گیم مورد نظرت رو انتخاب کن</p>
                             <p>2. از طریق درگاه بانکی پرداخت خودتون رو انجام بدید</p>
@@ -86,196 +87,7 @@ export default function Home() {
 
             <Container>
                 <section className={`text-center pb-[13px]`}>
-                    <p className={`text-secondary text-2xl/[116%] font-extrabold mb-5`}>کنسول و لوازم جانبی رو از سایبر
-                        گیم‌استور</p>
-                    <h2 className={`text-secondary text-5xl/[116%] font-extrabold mb-5`}>با خیال راحــــت بخــر!!!</h2>
-                    <Image className={`inline-block mb-5`} src={`/console.webp`} alt={`console`} width={254}
-                           height={254}/>
-                    <div className={`grid grid-cols-12 gap-6 mb-5`}>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/1.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/1.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/1.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/1.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/2.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/2.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/2.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/2.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/3.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/3.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/3.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                        <div className={`col-span-12 md:col-span-6 lg:col-span-3`}>
-                            <a
-                                href={`#`}
-                                className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
-                            >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>Sony Headphone</div>
-                                <Image
-                                    src={'/headset/3.png'}
-                                    alt={'headset'}
-                                    className="w-24 h-24 object-cover shrink-0"
-                                    width={96}
-                                    height={96}
-                                />
-                            </a>
-                        </div>
-                    </div>
-                    <Link href={`#`}
-                          className={`inline-block py-4 px-[45px] bg-primary text-white rounded-[15px] lg:text-2xl/[116%] font-extrabold hover:bg-white hover:text-secondary transition-colors`}>رفتن
-                        به فروشگاه</Link>
+                    <ConsoleSlider />
                 </section>
             </Container>
 
