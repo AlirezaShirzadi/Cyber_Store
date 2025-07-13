@@ -4,6 +4,12 @@ const endpoints = {
             url: () => `homepage/heroslides`,
             method: `GET`
         }
+    },
+    shop: {
+        slider: {
+            url: () => `product/store-sliders`,
+            method: `GET`
+        }
     }
 }
 

@@ -9,11 +9,13 @@ import Link from "next/link";
 import PlanSlider from "@/components/PlanSlider/PlanSlider";
 import BlogSlider from "@/components/BlogSlider/BlogSlider";
 import ConsoleSlider from "@/components/ConsoleSlider/ConsoleSlider";
+import AnimatedBackground from "@/components/AnimatedBackground/AnimatedBackground";
 
 export default function Home() {
 
     return (
         <>
+            <AnimatedBackground />
             <Container>
                 <section className={`pb-6 lg:pb-[167px] pt-[197px]`}>
                     <div className={`font-vazir`}>
@@ -98,10 +100,10 @@ export default function Home() {
             </Container>
 
             <Container>
-                <section className={`pt-[76px] pb-[60px] px-4 md:px-6 lg:px-0`}>
-                    <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold text-secondary text-center mb-[28px]`}>به‌روزترین اخبار دنیای
+                <section className={`pt-[76px] pb-[60px] md:px-6`}>
+                    <h2 className={`text-2xl md:text-4xl lg:text-5xl font-bold text-secondary text-center mb-[28px]`}>به‌روزترین اخبار دنیای
                         سونی در سایبر گیم‌استور</h2>
-                    <p className={`text-base md:text-lg text-[#3200AEBF] text-center mb-[28px] px-2 md:px-4 lg:px-0`}>تو بخش اخبار سایبر گیم‌استور، همیشه
+                    <p className={`text-base md:text-lg text-[#3200AEBF] text-justify lg:text-center mb-[28px] px-2 md:px-4 lg:px-0`}>تو بخش اخبار سایبر گیم‌استور، همیشه
                         یه قدم جلوتر از دنیای سونی باش! ما به‌روزترین اخبار رو از بازی‌های جدید، آپدیت‌های کنسول‌های PS4
                         و PS5، رویدادهای ویژه و حتی شایعات هیجان‌انگیز براتون جمع‌آوری کردیم. اینجا هر گیمری می‌تونه
                         سریع و ساده با آخرین اتفاقات دنیای سونی همراه بشه. خبرها رو بخون، نظرت رو بگو و با ما تو جریان
