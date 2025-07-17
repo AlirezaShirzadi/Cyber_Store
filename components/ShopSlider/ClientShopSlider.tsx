@@ -27,7 +27,6 @@ export default function ClientShopSlider({data}: { data: ShopSliderItem[] }) {
     return <Swiper
         modules={[EffectFade, Pagination]}
         slidesPerView={1}
-        navigation
         pagination={{
             el: ".custom-pagination",
             clickable: true,
