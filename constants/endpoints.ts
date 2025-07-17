@@ -9,6 +9,10 @@ const endpoints = {
         slider: {
             url: () => `product/store-sliders`,
             method: `GET`
+        },
+        items: {
+            url: () => `product/list`,
+            method: `GET`
         }
     }
 }

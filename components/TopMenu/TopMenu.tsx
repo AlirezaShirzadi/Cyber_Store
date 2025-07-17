@@ -74,7 +74,7 @@ export default function TopMenu() {
                 {/* Desktop Navigation - hidden on mobile and tablet */}
                 <nav className={`hidden lg:flex items-center gap-x-[46px] text-primary font-medium text-base`}>
                     <Link className={`text-secondary`} href={`/`}>خانه</Link>
-                    <Link href={`/`}>فروشگاه</Link>
+                    <Link href={`/shop`}>فروشگاه</Link>
                     <Link href={`/`}>درباره ما</Link>
                     <Link href={`/`}>تماس با ما</Link>
                     <Link href={`/`}>وبلاگ</Link>
@@ -186,7 +186,7 @@ export default function TopMenu() {
 
                     <nav className="flex flex-col gap-y-4 text-primary font-medium text-base mb-6">
                         <Link className={`text-secondary`} href={`/`} onClick={() => setIsDrawerOpen(false)}>خانه</Link>
-                        <Link href={`/`} onClick={() => setIsDrawerOpen(false)}>فروشگاه</Link>
+                        <Link href={`/shop`} onClick={() => setIsDrawerOpen(false)}>فروشگاه</Link>
                         <Link href={`/`} onClick={() => setIsDrawerOpen(false)}>درباره ما</Link>
                         <Link href={`/`} onClick={() => setIsDrawerOpen(false)}>تماس با ما</Link>
                         <Link href={`/`} onClick={() => setIsDrawerOpen(false)}>وبلاگ</Link>
