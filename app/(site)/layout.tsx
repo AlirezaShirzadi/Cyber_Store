@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./../globals.css";
 import TopMenu from "@/components/TopMenu/TopMenu";
 import TanStackProvider from "@/services/TanStackProvider/QueryClientProvider";
+import Footer from "@/components/Footer/Footer";
 
 const Vazir = localFont({
     src: [
@@ -66,11 +67,12 @@ export default async function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="fa" dir="rtl" className={Vazir.variable}>
+        <html lang="fa" dir="rtl" className={`${Vazir.variable} bg-[#E1E4FA]`}>
             <body className={`${Vazir.className} antialiased`}>
                 <TanStackProvider>
                     <TopMenu />
                     <main>{children}</main>
+                    <Footer />
                 </TanStackProvider>
             </body>
         </html>

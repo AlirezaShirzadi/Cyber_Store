@@ -113,3 +113,9 @@
         object-fit: cover !important;
     }
 }
+
+.swiper-gallery1{
+    .swiper-wrapper{
+        justify-content: center;
+    }
+}
