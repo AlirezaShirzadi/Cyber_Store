@@ -6,7 +6,6 @@ import TestimonialItem from "@/components/TestimonialItem/TestimonialItem";
 import {
     GetRelatedProducts,
     GetShopItemDetails,
-    GetShopItemDetailsDescription,
 } from "@/services/Shop/service";
 import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
@@ -15,7 +14,6 @@ export default async function Page({ params }: { params: { id: string } }) {
     const id = params.id;
 
     const shopItemDetails = await GetShopItemDetails(id);
-    const shopItemDetailsDescription = await GetShopItemDetailsDescription(id);
     const relatedProducts = await GetRelatedProducts(id);
 
     return (
@@ -117,8 +115,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                             <div
                                 className="[&>*]:text-justify!"
                                 dangerouslySetInnerHTML={{
-                                    __html: shopItemDetailsDescription?.data
-                                        ?.content,
+                                    __html: shopItemDetails?.data
+                                        ?.description,
                                 }}
                             />
                         </div>

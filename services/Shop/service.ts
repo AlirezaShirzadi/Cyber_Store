@@ -57,21 +57,6 @@ export async function GetShopItemDetails(id: string) {
     }
 }
 
-export async function GetShopItemDetailsDescription(id: string) {
-    try {
-        const response = await axiosInstance({
-            url: endpoints.shop.details_description.url(id),
-            method: endpoints.shop.details_description.method,
-        });
-
-        if (response) {
-            return response;
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 export async function GetRelatedProducts(id: string) {
     try {
         const response = await axiosInstance({

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import ShopItem from "./ShopItem/ShopItem";
 
-export default function Shop({ allShopItems }: any) {
+export default function Shop({ allShopItems, gridSize }: any) {
     const [shopItemViwes, setShopItemViewes] = useState<"list" | "items">(
         "items"
     );
@@ -53,7 +53,7 @@ export default function Shop({ allShopItems }: any) {
                 }`}
             >
                 {allShopItems?.results?.map((item: any) => {
-                    return <ShopItem key={item?.id} item={item} view={shopItemViwes} />;
+                    return <ShopItem key={item?.id} item={item} view={shopItemViwes} gridSize={gridSize} />;
                 })}
             </div>
         </>

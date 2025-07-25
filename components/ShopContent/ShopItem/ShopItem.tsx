@@ -5,9 +5,9 @@ import { formatPrice } from "@/utils/formatPrice";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function ShopItem({ item, view }: any) {
+export default function ShopItem({ item, view, gridSize }: any) {
     return view === "items" ? (
-        <div className="col-span-12 md:col-span-6 lg:col-span-3">
+        <div className={`col-span-12 md:col-span-6 lg:col-span-${gridSize}`}>
             <Link className="block h-[148px] mb-2.5" href={`/shop/${item?.id}`}>
                 <Image
                     className={`w-full h-full object-cover`}
@@ -23,10 +23,23 @@ export default function ShopItem({ item, view }: any) {
             >
                 {item?.title_fa}
             </Link>
-            <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-end">
-                <span>{formatPrice(item?.price)}</span>
-                <span>تومان</span>
-            </div>
+            {!item?.has_discount ? (
+                <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4">
+                    <span>{formatPrice(item?.price)}</span>
+                    <span>تومان</span>
+                </div>
+            ) : (
+                <div className="flex flex-wrap lg:flex-nowrap items-center lg:gap-10 justify-end">
+                    <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4 line-through text-black/50">
+                        <span>{formatPrice(item?.price)}</span>
+                        <span>تومان</span>
+                    </div>
+                    <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4">
+                        <span>{formatPrice(item?.final_price)}</span>
+                        <span>تومان</span>
+                    </div>
+                </div>
+            )}
         </div>
     ) : (
         <div className="col-span-12">

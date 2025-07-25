@@ -27,6 +27,16 @@ const endpoints = {
             method: `GET`,
         },
     },
+    search: {
+        filters: {
+            url: () => `/product/product-filter`,
+            method: `GET`,
+        },
+        search_filters: {
+            url: () => `/product/product-search-with-filter`,
+            method: `GET`,
+        },
+    },
 };
 
 export default endpoints;
