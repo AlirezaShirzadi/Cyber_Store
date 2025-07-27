@@ -4,6 +4,10 @@ const endpoints = {
             url: () => `homepage/heroslides`,
             method: `GET`,
         },
+        secondarySlide: {
+            url: () => `homepage/secondary-slides`,
+            method: `GET`,
+        },
     },
     shop: {
         slider: {
@@ -45,8 +49,8 @@ const endpoints = {
         verify_otp: {
             url: () => `account/auth/verify-otp/`,
             method: `POST`,
-        }
-    }
+        },
+    },
 };
 
 export default endpoints;

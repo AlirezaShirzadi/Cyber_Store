@@ -11,7 +11,7 @@ import BlogSlider from "@/components/BlogSlider/BlogSlider";
 import ConsoleSlider from "@/components/ConsoleSlider/ConsoleSlider";
 import AnimatedBackground from "@/components/AnimatedBackground/AnimatedBackground";
 
-export default function Home() {
+export default async function Home() {
 
     return (
         <>
