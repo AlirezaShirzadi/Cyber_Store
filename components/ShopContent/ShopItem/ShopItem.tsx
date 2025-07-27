@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function ShopItem({ item, view, gridSize }: any) {
     return view === "items" ? (
-        <div className={`col-span-12 md:col-span-6 lg:col-span-${gridSize}`}>
+        <div className={`col-span-12 md:col-span-6 lg:col-span-4`}>
             <Link className="block h-[148px] mb-2.5" href={`/shop/${item?.id}`}>
                 <Image
                     className={`w-full h-full object-cover`}

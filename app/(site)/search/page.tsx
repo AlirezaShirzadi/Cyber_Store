@@ -1,4 +1,6 @@
 import Container from "@/components/Container/Container";
+import Pagination from "@/components/Pagination/Pagination";
+import SearchPagination from "@/components/Pagination/SearchPagination";
 import Search from "@/components/Search/Search";
 import Shop from "@/components/ShopContent/Shop";
 import {
@@ -41,14 +43,23 @@ export default async function Page({
             <Container>
                 <section className="pt-[86px]">
                     <div className="grid grid-cols-12 gap-6">
-                        <div className="col-span-12 md:col-span-6 xl:col-span-3">
+                        <div className="col-span-12 md:col-span-4 lg:col-span-6 xl:col-span-3">
                             <h1 className="mb-[28px] text-5xl text-secondary font-bold">
                                 {params?.query}
                             </h1>
                             <Search filters={filters?.data} params={params} />
                         </div>
-                        <div className="col-span-12 md:col-span-6 xl:col-span-9">
-                            <Shop allShopItems={filteredProducts?.data} gridSize={4} />
+                        <div className="col-span-12 md:col-span-8 lg:col-span-6 xl:col-span-9 mb-8">
+                            <Shop
+                                allShopItems={filteredProducts?.data}
+                            />
+                            <SearchPagination
+                                currentPage={params.page}
+                                pageSize={9}
+                                totalItems={
+                                    filteredProducts?.data?.total_products
+                                }
+                            />
                         </div>
                     </div>
                 </section>
