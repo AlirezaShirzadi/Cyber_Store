@@ -1,0 +1,6 @@
+import Account from "@/components/Account/Account";
+import React from "react";
+
+export default async function Page() {
+    return <Account />;
+}

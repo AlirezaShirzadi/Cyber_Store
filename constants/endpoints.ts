@@ -37,6 +37,16 @@ const endpoints = {
             method: `GET`,
         },
     },
+    auth: {
+        request_otp: {
+            url: () => `account/auth/request-otp/`,
+            method: `POST`,
+        },
+        verify_otp: {
+            url: () => `account/auth/verify-otp/`,
+            method: `POST`,
+        }
+    }
 };
 
 export default endpoints;
