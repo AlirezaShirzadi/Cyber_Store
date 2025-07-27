@@ -13,37 +13,7 @@ import "swiper/css/thumbs";
 import "swiper/css/effect-fade";
 import Image from "next/image";
 
-// Sample data structure - replace with your actual data
-interface HeadsetItem {
-    id: number;
-    name: string;
-    image: string;
-    description?: string;
-}
-
-const sampleData: HeadsetItem[] = [
-    {
-        id: 1,
-        name: "Headset 1",
-        image: "/headset/1.png",
-        description: "Premium wireless headset",
-    },
-    {
-        id: 2,
-        name: "Headset 2",
-        image: "/headset/2.png",
-        description: "Gaming headset with RGB",
-    },
-    {
-        id: 3,
-        name: "Headset 3",
-        image: "/headset/3.png",
-        description: "Noise-canceling headset",
-    },
-];
-
 export default function ClientHeadsetSlider({ data }: any) {
-    console.log("HeadsetSlider data:", data);
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
     const [mainSwiper, setMainSwiper] = useState<SwiperType | null>(null);
     const [activeIndex, setActiveIndex] = useState(0);

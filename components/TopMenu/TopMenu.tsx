@@ -2,13 +2,18 @@
 import React, { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { isAuthenticated, logout } from "@/services/Auth/service";
 
 export default function TopMenu() {
     const [currentTime, setCurrentTime] = useState<string>("");
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+    const [isAuthed, setIsAuthed] = useState<boolean>(isAuthenticated());
+    const [showDropdown, setShowDropdown] = useState<boolean>(false);
+
     const searchInputRef = useRef<HTMLInputElement>(null);
     const drawerRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -95,10 +100,10 @@ export default function TopMenu() {
                     <Link className={`text-secondary`} href={`/`}>
                         خانه
                     </Link>
-                    <Link href={`/shop`}>فروشگاه</Link>
-                    <Link href={`/`}>درباره ما</Link>
-                    <Link href={`/`}>تماس با ما</Link>
-                    <Link href={`/`}>وبلاگ</Link>
+                    <Link href={`/shop?page=1&category=all`}>فروشگاه</Link>
+                    <Link href={`/about`}>درباره ما</Link>
+                    <Link href={`/contact`}>تماس با ما</Link>
+                    <Link href={`/blog`}>وبلاگ</Link>
                 </nav>
 
                 {/* Desktop Right Section - hidden on mobile and tablet */}
@@ -180,7 +185,51 @@ export default function TopMenu() {
                     </div>
 
                     <div>
-                        <Link href={`#`}>ورود / ثبت نام</Link>
+                        {isAuthed ? (
+                            <div className="relative" ref={dropdownRef}>
+                                <div
+                                    onClick={() =>
+                                        setShowDropdown(!showDropdown)
+                                    }
+                                    className="flex items-center justify-center gap-x-2 cursor-pointer"
+                                >
+                                    <div className="bg-primary size-10 rounded-full"></div>
+                                    <span>تستی</span>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="6"
+                                        height="4"
+                                        viewBox="0 0 6 4"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M3 4L0.401924 0.25L5.59808 0.25L3 4Z"
+                                            fill="#7673D5"
+                                        />
+                                    </svg>
+                                </div>
+                                <div
+                                    className={`absolute transition-all ${
+                                        showDropdown ? "visible" : "hidden"
+                                    } bg-[#BBC1EF] py-[9px] px-2.5 min-w-[129px] rounded-[7px] top-[calc(100%+20px)] -right-8`}
+                                >
+                                    <Link
+                                        className="inline-block mb-4 text-secondary text-xs"
+                                        href={`/account/dashboard/cart`}
+                                    >
+                                        سبد خرید
+                                    </Link>
+                                    <div
+                                        onClick={() => logout()}
+                                        className="text-secondary text-xs cursor-pointer"
+                                    >
+                                        خروج از حساب کاربری
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <Link href={`/account`}>ورود / ثبت نام</Link>
+                        )}
                     </div>
                 </div>
 
@@ -322,18 +371,27 @@ export default function TopMenu() {
                             خانه
                         </Link>
                         <Link
-                            href={`/shop`}
+                            href={`/shop?page=1&category=all`}
                             onClick={() => setIsDrawerOpen(false)}
                         >
                             فروشگاه
                         </Link>
-                        <Link href={`/`} onClick={() => setIsDrawerOpen(false)}>
+                        <Link
+                            href={`/about`}
+                            onClick={() => setIsDrawerOpen(false)}
+                        >
                             درباره ما
                         </Link>
-                        <Link href={`/`} onClick={() => setIsDrawerOpen(false)}>
+                        <Link
+                            href={`/contact`}
+                            onClick={() => setIsDrawerOpen(false)}
+                        >
                             تماس با ما
                         </Link>
-                        <Link href={`/`} onClick={() => setIsDrawerOpen(false)}>
+                        <Link
+                            href={`/blog`}
+                            onClick={() => setIsDrawerOpen(false)}
+                        >
                             وبلاگ
                         </Link>
                     </nav>
@@ -346,9 +404,52 @@ export default function TopMenu() {
                     </div>
 
                     <div className="mt-auto pb-6 text-primary text-base font-medium">
-                        <Link href={`#`} onClick={() => setIsDrawerOpen(false)}>
-                            ورود / ثبت نام
-                        </Link>
+                        {isAuthed ? (
+                            <div className="relative" ref={dropdownRef}>
+                                <div
+                                    onClick={() =>
+                                        setShowDropdown(!showDropdown)
+                                    }
+                                    className="flex items-center justify-center gap-x-2 cursor-pointer"
+                                >
+                                    <div className="bg-primary size-10 rounded-full"></div>
+                                    <span>تستی</span>
+                                    <svg
+                                        className="rotate-180"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="6"
+                                        height="4"
+                                        viewBox="0 0 6 4"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M3 4L0.401924 0.25L5.59808 0.25L3 4Z"
+                                            fill="#7673D5"
+                                        />
+                                    </svg>
+                                </div>
+                                <div
+                                    className={`absolute transition-all ${
+                                        showDropdown ? "visible" : "hidden"
+                                    } bg-[#BBC1EF] py-[9px] px-2.5 min-w-[129px] rounded-[7px] -top-20 right-0 left-0`}
+                                >
+                                    <Link
+                                        className="inline-block mb-4 text-secondary text-xs"
+                                        href={`/account/dashboard/cart`}
+                                    >
+                                        سبد خرید
+                                    </Link>
+                                    <div
+                                        onClick={() => logout()}
+                                        className="text-secondary text-xs cursor-pointer"
+                                    >
+                                        خروج از حساب کاربری
+                                    </div>
+                                </div>
+                            </div>
+                        ) : (
+                            <Link href={`/account`}>ورود / ثبت نام</Link>
+                        )}
                     </div>
                 </div>
             </div>

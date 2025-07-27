@@ -52,3 +52,21 @@ export async function VerifyOtp(
         console.error("Error verifying OTP:", error);
     }
 }
+
+export const isAuthenticated = (): boolean => {
+  if (typeof window === "undefined") return false;
+
+  const accessToken = localStorage.getItem("access_token");
+  const refreshToken = localStorage.getItem("refresh_token");
+
+  return !!accessToken || !!refreshToken;
+};
+
+export const logout = () => {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+
+    window.location.href = window.location.href;
+  }
+};

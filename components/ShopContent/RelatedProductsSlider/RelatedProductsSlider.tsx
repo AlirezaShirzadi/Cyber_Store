@@ -16,14 +16,13 @@ export default function RelatedProductsSlider({ data }: any) {
             centeredSlides={true}
             loop={true}
             breakpoints={{
-                // when window width is >= 640px (sm)
                 640: {
                     slidesPerView: 2.2,
                 },
             }}
             className="mb-5"
         >
-            {data.map((item: any) => (
+            {data?.map((item: any) => (
                 <SwiperSlide key={"related " + item.id}>
                     <ShopItem key={item?.id} item={item} view={"items"} />
                 </SwiperSlide>

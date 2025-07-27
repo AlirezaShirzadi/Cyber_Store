@@ -5,6 +5,7 @@ import Image from "next/image";
 import axios from "axios";
 import TopMenu from "@/components/TopMenu/TopMenu";
 import axiosInstance from "@/services/AxiosInstance/axiosIntance";
+import ScreenLoading from "@/components/ScreenLoading/ScreenLoading";
 
 export default function DashboardLayout({
     children,
@@ -47,9 +48,7 @@ export default function DashboardLayout({
 
     if (loading)
         return (
-            <div className="bg-[#E1E4FA] min-h-dvh">
-                <Image className="w-dvw h-dvh" src={`/loading.webp`} alt="loading" width={1000} height={1000} />
-            </div>
+            <ScreenLoading />
         );
 
     return (
