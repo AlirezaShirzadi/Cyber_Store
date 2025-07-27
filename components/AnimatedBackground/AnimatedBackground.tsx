@@ -14,15 +14,10 @@ const AnimatedBackground = () => {
         });
     }, []);
 
-    const particlesLoaded = (container) => {
-        console.log(container);
-    };
-
     if (init) {
         return (
             <Particles
                 id="tsparticles"
-                particlesLoaded={particlesLoaded}
                 options={{
                     background: {
                         color: "#E1E4F9"

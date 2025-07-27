@@ -28,3 +28,18 @@ export const getSecondarySlide = async () => {
         console.log(error);
     }
 };
+
+export const getBestSellingProducts = async () => {
+    try {
+        const response = await axiosIntance({
+            url: endpoints.homepage.bestSelling.url(),
+            method: endpoints.homepage.bestSelling.method,
+        });
+
+        if (response) {
+            return response;
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};

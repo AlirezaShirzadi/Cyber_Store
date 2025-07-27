@@ -218,7 +218,7 @@ export default function ClientHeadsetSlider({ data }: any) {
                                     `}
                             >
                                 <div className={`py-[36px] px-4 text-nowrap`}>
-                                    {item?.product_title_fa}
+                                    {item?.product_title_fa?.slice(0, 15) + "..."}
                                 </div>
                                 <Image
                                     src={item?.thumbnail}

@@ -5,36 +5,28 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Image from "next/image";
 import Link from "next/link";
 
-import 'swiper/css';
+import "swiper/css";
 
-// Sample data structure - replace with your actual data
-interface ConsoleItem {
-    id: number;
-    name: string;
-    image: string;
-}
-
-const consoleItems: ConsoleItem[] = [
-    { id: 1, name: "Sony Headphone", image: "/headset/1.png" },
-    { id: 2, name: "Sony Headphone", image: "/headset/1.png" },
-    { id: 3, name: "Sony Headphone", image: "/headset/1.png" },
-    { id: 4, name: "Sony Headphone", image: "/headset/1.png" },
-    { id: 5, name: "Sony Headphone", image: "/headset/2.png" },
-    { id: 6, name: "Sony Headphone", image: "/headset/2.png" },
-    { id: 7, name: "Sony Headphone", image: "/headset/2.png" },
-    { id: 8, name: "Sony Headphone", image: "/headset/2.png" },
-    { id: 9, name: "Sony Headphone", image: "/headset/3.png" },
-    { id: 10, name: "Sony Headphone", image: "/headset/3.png" },
-    { id: 11, name: "Sony Headphone", image: "/headset/3.png" },
-    { id: 12, name: "Sony Headphone", image: "/headset/3.png" },
-];
-
-export default function ClientConsoleSlider() {
+export default function ClientConsoleSlider({ data }: any) {
     return (
         <div className="console-slider-container">
-            <p className={`text-secondary text-xl lg:text-2xl/[116%] font-extrabold mb-5`}>کنسول و لوازم جانبی رو از سایبر گیم‌استور</p>
-            <h2 className={`text-secondary text-3xl lg:text-5xl/[116%] font-extrabold mb-5`}>با خیال راحــــت بخــر!!!</h2>
-            <Image className={`inline-block mb-5`} src={`/console.webp`} alt={`console`} width={254} height={254}/>
+            <p
+                className={`text-secondary text-xl lg:text-2xl/[116%] font-extrabold mb-5`}
+            >
+                کنسول و لوازم جانبی رو از سایبر گیم‌استور
+            </p>
+            <h2
+                className={`text-secondary text-3xl lg:text-5xl/[116%] font-extrabold mb-5`}
+            >
+                با خیال راحــــت بخــر!!!
+            </h2>
+            <Image
+                className={`inline-block mb-5`}
+                src={`/console.webp`}
+                alt={`console`}
+                width={254}
+                height={254}
+            />
 
             {/* Mobile Slider - Only visible on mobile */}
             <div className="block lg:hidden">
@@ -47,20 +39,24 @@ export default function ClientConsoleSlider() {
                         // when window width is >= 640px (sm)
                         640: {
                             slidesPerView: 2.2,
-                        }
+                        },
                     }}
                     className="mb-5"
                 >
-                    {consoleItems.map((item) => (
-                        <SwiperSlide key={item.id}>
+                    {data?.results?.map((item: any) => (
+                        <SwiperSlide key={item?.id}>
                             <a
-                                href={`#`}
+                                href={`shop/${item?.id}`}
                                 className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
                             >
-                                <div className={`py-[36px] px-4 text-nowrap grow`}>{item.name}</div>
+                                <div
+                                    className={`py-[36px] px-4 text-nowrap grow`}
+                                >
+                                    {item?.title_fa?.slice(0, 15) + "..."}
+                                </div>
                                 <Image
-                                    src={item.image}
-                                    alt={item.name}
+                                    src={item?.image}
+                                    alt={item?.title_fa}
                                     className="w-24 h-24 object-cover shrink-0"
                                     width={96}
                                     height={96}
@@ -73,16 +69,18 @@ export default function ClientConsoleSlider() {
 
             {/* Desktop Grid - Only visible on desktop */}
             <div className={`hidden lg:grid grid-cols-12 gap-6 mb-5`}>
-                {consoleItems.map((item) => (
-                    <div key={item.id} className={`col-span-3`}>
+                {data?.results?.map((item: any) => (
+                    <div key={item?.id} className={`col-span-3`}>
                         <a
-                            href={`#`}
+                            href={`shop/${item?.id}`}
                             className={`relative flex items-center justify-between rounded-tr-[30px] rounded-bl-[30px] overflow-hidden transition-all duration-200 cursor-pointer bg-primary hover:bg-primary/50 text-white`}
                         >
-                            <div className={`py-[36px] px-4 text-nowrap grow`}>{item.name}</div>
+                            <div className={`py-[36px] px-4 text-nowrap grow`}>
+                                {item?.title_fa?.slice(0, 15) + "..."}
+                            </div>
                             <Image
-                                src={item.image}
-                                alt={item.name}
+                                src={item?.image}
+                                alt={item?.title_fa}
                                 className="w-24 h-24 object-cover shrink-0"
                                 width={96}
                                 height={96}
@@ -92,9 +90,12 @@ export default function ClientConsoleSlider() {
                 ))}
             </div>
 
-            <Link href={`#`}
-                  className={`inline-block py-4 px-[45px] bg-primary text-white rounded-[15px] lg:text-2xl/[116%] font-extrabold hover:bg-white hover:text-secondary transition-colors`}>رفتن
-                به فروشگاه</Link>
+            <Link
+                href={`/shop?page=1&category=all`}
+                className={`inline-block py-4 px-[45px] bg-primary text-white rounded-[15px] lg:text-2xl/[116%] font-extrabold hover:bg-white hover:text-secondary transition-colors`}
+            >
+                رفتن به فروشگاه
+            </Link>
         </div>
     );
 }

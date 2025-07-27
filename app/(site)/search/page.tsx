@@ -35,8 +35,6 @@ export default async function Page({
     const filters = await GetProductFilters();
     const filteredProducts = await GetSearchProductFilters(params);
 
-    console.log("Search Params:", filteredProducts?.data);
-
     return (
         <div className={`bg-[#E1E4FA] min-h-dvh`}>
             <Container>

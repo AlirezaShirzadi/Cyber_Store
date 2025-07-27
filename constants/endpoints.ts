@@ -8,6 +8,10 @@ const endpoints = {
             url: () => `homepage/secondary-slides`,
             method: `GET`,
         },
+        bestSelling: {
+            url: () => `report/best-selling-products`,
+            method: `GET`,
+        }
     },
     shop: {
         slider: {
