@@ -1,5 +1,4 @@
 import Container from "@/components/Container/Container";
-import Pagination from "@/components/Pagination/Pagination";
 import SearchPagination from "@/components/Pagination/SearchPagination";
 import Search from "@/components/Search/Search";
 import Shop from "@/components/ShopContent/Shop";
@@ -7,7 +6,7 @@ import {
     GetProductFilters,
     GetSearchProductFilters,
 } from "@/services/Search/service";
-import React from "react";
+import React, { Suspense } from "react";
 
 export default async function Page({
     searchParams,
@@ -36,7 +35,7 @@ export default async function Page({
     const filters = await GetProductFilters();
     const filteredProducts = await GetSearchProductFilters(params);
 
-    console.log(filteredProducts?.data);
+    console.log("Search Params:", filteredProducts?.data);
 
     return (
         <div className={`bg-[#E1E4FA] min-h-dvh`}>
@@ -50,16 +49,30 @@ export default async function Page({
                             <Search filters={filters?.data} params={params} />
                         </div>
                         <div className="col-span-12 md:col-span-8 lg:col-span-6 xl:col-span-9 mb-8">
-                            <Shop
-                                allShopItems={filteredProducts?.data}
-                            />
-                            <SearchPagination
-                                currentPage={params.page}
-                                pageSize={9}
-                                totalItems={
-                                    filteredProducts?.data?.total_products
-                                }
-                            />
+                            <Suspense fallback={<div>در حال بارگزاری</div>}>
+                                {filteredProducts?.data?.total_products !==
+                                0 ? (
+                                    <>
+                                        <Shop
+                                            allShopItems={
+                                                filteredProducts?.data
+                                            }
+                                        />
+                                        <SearchPagination
+                                            currentPage={params.page}
+                                            pageSize={9}
+                                            totalItems={
+                                                filteredProducts?.data
+                                                    ?.total_products
+                                            }
+                                        />
+                                    </>
+                                ) : (
+                                    <div className="text-center text-2xl text-secondary font-bold">
+                                        محصولی یافت نشد
+                                    </div>
+                                )}
+                            </Suspense>
                         </div>
                     </div>
                 </section>
