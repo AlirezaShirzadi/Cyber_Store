@@ -20,8 +20,6 @@ export default async function Page({ params }: { params: { id: string } }) {
     const shopItemDetails = await GetShopItemDetails(id);
     const relatedProducts = await GetRelatedProducts(id);
 
-    console.log(shopItemDetails?.data);
-
     return (
         <Suspense fallback={<ScreenLoading />}>
             <div className="bg-[#E1E4FA]">
