@@ -8,7 +8,7 @@ export default function TopMenu() {
     const [currentTime, setCurrentTime] = useState<string>("");
     const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-    const [isAuthed, setIsAuthed] = useState<boolean>(isAuthenticated());
+    const [isAuthed, setIsAuthed] = useState<boolean>(false);
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
     const searchInputRef = useRef<HTMLInputElement>(null);
@@ -27,6 +27,12 @@ export default function TopMenu() {
     };
 
     useEffect(() => {
+        const checkAuth = async () => {
+            setIsAuthed(await isAuthenticated());
+        };
+
+        checkAuth();
+
         const updateTime = () => {
             const time = new Date().toLocaleString("en-US", {
                 hour: "numeric",

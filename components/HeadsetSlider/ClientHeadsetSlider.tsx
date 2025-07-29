@@ -60,7 +60,7 @@ export default function ClientHeadsetSlider({ data }: any) {
                     }
                     className="main-headset-slider"
                 >
-                    {data.map((item: any) => (
+                    {data?.map((item: any) => (
                         <SwiperSlide className={`pb-5`} key={item?.product_id}>
                             <div className="grid grid-cols-12 gap-6">
                                 <div
@@ -204,7 +204,7 @@ export default function ClientHeadsetSlider({ data }: any) {
                     modules={[Thumbs]}
                     className="thumbnail-slider [&>.swiper-wrapper]:justify-center [&>.swiper-wrapper]:gap-5"
                 >
-                    {data.map((item: any, index: number) => (
+                    {data?.map((item: any, index: number) => (
                         <SwiperSlide key={item?.product_id + "thumb"} className="!w-auto py-2">
                             <button
                                 onClick={() => handleThumbnailClick(index)}

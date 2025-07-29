@@ -11,7 +11,7 @@ const endpoints = {
         bestSelling: {
             url: () => `report/best-selling-products`,
             method: `GET`,
-        }
+        },
     },
     shop: {
         slider: {
@@ -53,6 +53,12 @@ const endpoints = {
         verify_otp: {
             url: () => `account/auth/verify-otp/`,
             method: `POST`,
+        },
+    },
+    cart: {
+        add_to_cart: {
+            url: () => `order/basket/item/`,
+            method: "PATCH",
         },
     },
 };

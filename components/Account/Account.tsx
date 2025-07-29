@@ -62,8 +62,6 @@ export default function Account() {
             setPhone(data.phone);
             toast.success("کد تایید به شماره شما ارسال شد.");
             setIsOtpStep(true);
-        } else {
-            toast.error("خطا در ارسال کد تایید. لطفا دوباره تلاش کنید.");
         }
     };
 

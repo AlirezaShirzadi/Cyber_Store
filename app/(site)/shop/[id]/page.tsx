@@ -12,12 +12,15 @@ import {
 import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
 import { Suspense } from "react";
+import { ToastContainer } from "react-toastify";
 
 export default async function Page({ params }: { params: { id: string } }) {
     const id = params.id;
 
     const shopItemDetails = await GetShopItemDetails(id);
     const relatedProducts = await GetRelatedProducts(id);
+
+    console.log(shopItemDetails?.data);
 
     return (
         <Suspense fallback={<ScreenLoading />}>
@@ -92,7 +95,17 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     </div>
                                 </div>
                                 <div className="bg-[#BBC1EF] h-0.5 w-full max-w-[354px] mb-[21px]" />
-                                <BuyProduct id={id} />
+                                <BuyProduct
+                                    id={id}
+                                    is_physical={
+                                        shopItemDetails?.data?.is_physical
+                                    }
+                                    is_available={
+                                        shopItemDetails?.data?.is_available
+                                    }
+                                    type={shopItemDetails?.data?.type}
+                                    feature={shopItemDetails?.data?.feature}
+                                />
                             </div>
                             <div className="col-span-12 lg:col-span-6 mb-[21px] order-1 lg:order-2">
                                 <Image
@@ -112,7 +125,12 @@ export default async function Page({ params }: { params: { id: string } }) {
                             <div className="grid grid-cols-12 gap-6 items-center">
                                 {shopItemDetails?.data?.galleries?.length >
                                     0 && (
-                                    <div className="col-span-12 lg:col-span-6">
+                                    <div
+                                        className={`col-span-12 ${
+                                            shopItemDetails?.data
+                                                ?.description && "lg:col-span-6"
+                                        }`}
+                                    >
                                         <ShopItemSlider
                                             data={
                                                 shopItemDetails?.data?.galleries
@@ -121,7 +139,12 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     </div>
                                 )}
                                 {shopItemDetails?.data?.description && (
-                                    <div className="col-span-12 lg:col-span-6">
+                                    <div
+                                        className={`col-span-12 ${
+                                            shopItemDetails?.data?.galleries
+                                                ?.length > 0 && "lg:col-span-6"
+                                        }`}
+                                    >
                                         <h2 className="text-3xl lg:text-5xl/[64px] text-secondary mb-[21px] font-bold opacity-75">
                                             توضیحات
                                         </h2>
@@ -185,6 +208,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     )}
                 </Container>
             </div>
+            <ToastContainer />
         </Suspense>
     );
 }
