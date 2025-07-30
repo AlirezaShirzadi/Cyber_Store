@@ -12,7 +12,25 @@ export async function AddToCart(data: CartItem) {
         });
 
         if (response) {
-            return response
+            return response;
+        }
+    } catch (error: any) {
+        error?.response?.data?.detail?.forEach((error: string) => {
+            toast.error(error);
+        });
+        console.log(error);
+    }
+}
+
+export async function GetCartDetails() {
+    try {
+        const response = await axiosInstanceWithAuth({
+            url: endpoints.cart.get_cart_detail.url(),
+            method: endpoints.cart.get_cart_detail.method,
+        });
+
+        if (response) {
+            return response;
         }
     } catch (error: any) {
         error?.response?.data?.detail?.forEach((error: string) => {

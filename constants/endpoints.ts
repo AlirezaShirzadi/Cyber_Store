@@ -60,6 +60,10 @@ const endpoints = {
             url: () => `order/basket/item/`,
             method: "PATCH",
         },
+        get_cart_detail: {
+            url: () => `order/basket/`,
+            method: "GET",
+        },
     },
 };
 
