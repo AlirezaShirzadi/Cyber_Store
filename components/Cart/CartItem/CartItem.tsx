@@ -35,14 +35,32 @@ export default function CartItem({ item, refreshCart }: any) {
                 />
             </div>
             <div className="col-span-12 lg:col-span-10">
-                <div className="flex justify-between items-end h-full">
+                <div className="flex flex-col gap-2 lg:flex-row justify-between items-end h-full">
                     <div className="self-start flex flex-col justify-between h-full">
                         <div className="text-secondary text-sm font-medium">
                             {item?.product_title}
                         </div>
-                        <div className="text-xs text-secondary font-bold">
-                            {formatPrice(item?.product_price)}{" "}
-                            <span>تومان</span>
+                        {item?.stock_warning && (
+                            <div className="text-xs text-red-600">
+                                {item?.stock_warning}
+                            </div>
+                        )}
+                        <div className="flex items-center gap-6">
+                            <div
+                                className={`text-xs text-secondary font-bold ${
+                                    item?.discount_percentage > 0 &&
+                                    "line-through"
+                                }`}
+                            >
+                                {formatPrice(item?.product_price)}{" "}
+                                <span>تومان</span>
+                            </div>
+                            {item?.discount_percentage > 0 && (
+                                <div className="text-xs text-secondary font-bold">
+                                    {formatPrice(item?.product_final_price)}{" "}
+                                    <span>تومان</span>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="flex items-center gap-5 py-[5px] px-[9px] border border-primary rounded-[5px]">
