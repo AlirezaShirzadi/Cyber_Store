@@ -39,3 +39,25 @@ export async function GetCartDetails() {
         console.log(error);
     }
 }
+
+export async function GetDiscountCart(code?: string) {
+    try {
+        const response = await axiosInstanceWithAuth({
+            url: endpoints.cart.get_discount_cart.url(),
+            method: endpoints.cart.get_discount_cart.method,
+            params: {
+                code,
+            },
+        });
+
+        if (response) {
+            return response;
+        }
+    } catch (error: any) {
+        toast.error(error?.response?.data?.detail)
+        // error?.response?.data?.detail?.forEach((error: string) => {
+        //     toast.error(error);
+        // });
+        console.log(error);
+    }
+}

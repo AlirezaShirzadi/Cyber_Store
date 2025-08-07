@@ -64,7 +64,21 @@ const endpoints = {
             url: () => `order/basket/`,
             method: "GET",
         },
+        get_discount_cart: {
+            url: () => `order/basket/apply-discount/`,
+            method: `GET`,
+        },
     },
+    account: {
+        get_basic_info: {
+            url: () => `account/basic-info/`,
+            method: `GET`,
+        },
+        update_account: {
+            url: () => `account/profile-update/`,
+            method: `PATCH`,
+        }
+    }
 };
 
 export default endpoints;

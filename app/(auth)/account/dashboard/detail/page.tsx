@@ -1,9 +1,12 @@
-"use client";
+"use client"
+
+import React, { useEffect, useState } from "react";
 import Container from "@/components/Container/Container";
-import { logout } from "@/services/Auth/service";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
+import {logout} from "@/services/Auth/service";
+import {usePathname} from "next/navigation";
+import { useForm } from "react-hook-form";
+import { GetAccountInfo, EditAccountInfo } from "@/services/Account/service";
 
 const sideItems = [
     {
@@ -12,7 +15,7 @@ const sideItems = [
     },
     {
         title: "سفارش‌ها",
-        href: "/account/dashboard/detail",
+        href: "/account/dashboard/orders",
         svg: (
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -90,63 +93,134 @@ const sideItems = [
 
 export default function Page() {
     const pathname = usePathname();
+    const [loading, setLoading] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
+    const [error, setError] = useState("");
+    
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm({
+        defaultValues: {
+            phone_number: "",
+            full_name: ""
+        }
+    });
 
-    return (
-        <div className="bg-[#E1E4FA] min-h-dvh">
-            <Container className="grid grid-cols-12 gap-x-6 items-center min-h-dvh py-24 lg:py-0">
-                <div className="col-span-12 lg:col-span-3">
-                    <div className="text-secondary text-2xl/[116%] font-extrabold">
-                        حساب کاربری من
-                    </div>
-                    <div className="w-full h-[1px] bg-[#BBC1EF] mt-[7px]" />
-                    <div className="w-full space-y-3.5 mt-3.5">
-                        {sideItems.map((item, index) => (
-                            <Link
-                                className={`block text-primary text-2xl/[116%] p-[7px] ${
-                                    pathname === item.href &&
-                                    "border border-[#BBC1EF] text-secondary rounded-[7px]"
-                                }`}
-                                key={"sideItem" + index}
-                                href={item.href}
-                                onClick={() => {
-                                    if (item.title === "خروج") {
-                                        logout();
-                                    }
-                                }}
-                            >
-                                {item.title}
-                            </Link>
-                        ))}
-                    </div>
+    useEffect(() => {
+        const fetchUserData = async () => {
+            setLoading(true);
+            try {
+                const response = await GetAccountInfo();
+                if (response && response.data) {
+                    setValue("phone_number", response.data.phone_number || "");
+                    setValue("full_name", response.data.full_name || "");
+                }
+            } catch (err) {
+                setError("خطا در دریافت اطلاعات کاربر");
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
+    }, [setValue]);
+
+    const onSubmit = async (data: { full_name: string; phone_number: string }) => {
+        setLoading(true);
+        setSubmitSuccess(false);
+        setError("");
+        
+        try {
+            const response = await EditAccountInfo({
+                full_name: data.full_name
+            });
+            
+            if (response) {
+                setSubmitSuccess(true);
+            }
+        } catch (err) {
+            setError("خطا در بروزرسانی اطلاعات");
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return <div className="bg-[#E1E4FA] min-h-dvh">
+        <Container className="grid grid-cols-12 gap-x-6 items-center min-h-dvh py-24 lg:py-0">
+            <div className="col-span-12 lg:col-span-3">
+                <div className="text-secondary text-2xl/[116%] font-extrabold">
+                    حساب کاربری من
                 </div>
-                <div className="col-span-12 lg:col-span-9 mt-8 lg:mt-0">
-                    <div className="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-[61px]">
-                        {sideItems?.map((item, index) => {
-                            if (index !== 0) {
-                                return (
-                                    <Link
-                                        key={"side_item" + index}
-                                        href={item.href}
-                                        className="col-span-12 lg:col-span-3 py-[70px] bg-[#BBC1EF40] rounded-[14px]"
-                                        onClick={() => {
-                                            if (item.title === "خروج") {
-                                                logout();
-                                            }
-                                        }}
-                                    >
-                                        <div className="size-[70px] mx-auto mb-4 lg:mb-[62px]">
-                                            {item.svg}
-                                        </div>
-                                        <div className="text-center text-primary text-2xl/[116%]">
-                                            {item.title}
-                                        </div>
-                                    </Link>
-                                );
-                            }
-                        })}
-                    </div>
+                <div className="w-full h-[1px] bg-[#BBC1EF] mt-[7px]"/>
+                <div className="w-full space-y-3.5 mt-3.5">
+                    {sideItems.map((item, index) => (
+                        <Link
+                            className={`block text-primary text-2xl/[116%] p-[7px] ${
+                                pathname === item.href &&
+                                "border border-[#BBC1EF] text-secondary rounded-[7px]"
+                            }`}
+                            key={"sideItem" + index}
+                            href={item.href}
+                            onClick={() => {
+                                if (item.title === "خروج") {
+                                    logout();
+                                }
+                            }}
+                        >
+                            {item.title}
+                        </Link>
+                    ))}
                 </div>
-            </Container>
-        </div>
-    );
+            </div>
+            <div className="col-span-12 lg:col-span-9 mt-8 lg:mt-0">
+                <div className={`text-5xl font-bold text-secondary mb-[42px]`}>جزئیات حساب</div>
+                
+                {error && (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                        {error}
+                    </div>
+                )}
+                
+                {submitSuccess && (
+                    <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                        اطلاعات با موفقیت بروزرسانی شد
+                    </div>
+                )}
+                
+                <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-[61px]">
+                    <div className={`col-span-12 lg:col-span-6`}>
+                        <label className={'block'}>شماره موبایل</label>
+                        <input 
+                            className={'border border-[#BBC1EF] rounded-[7px] focus-visible:outline-0 py-1.5 px-3 w-full'} 
+                            type='text'
+                            readOnly
+                            {...register("phone_number")}
+                        />
+                    </div>
+                    
+                    <div className={`col-span-12 lg:col-span-6`}>
+                        <label className={'block'}>نام کامل</label>
+                        <input 
+                            className={'border border-[#BBC1EF] rounded-[7px] focus-visible:outline-0 py-1.5 px-3 w-full'} 
+                            type='text'
+                            {...register("full_name", { required: "نام کامل الزامی است" })}
+                        />
+                        {errors.full_name && (
+                            <span className="text-red-500 text-sm">{errors.full_name.message}</span>
+                        )}
+                    </div>
+                    
+                    <div className="col-span-12">
+                        <button 
+                            type="submit" 
+                            disabled={loading}
+                            className="bg-secondary text-white py-2 px-6 rounded-[7px] hover:bg-opacity-90 transition-all"
+                        >
+                            {loading ? "در حال پردازش..." : "ذخیره تغییرات"}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </Container>
+    </div>
 }

@@ -3,26 +3,63 @@
 import CartItem from "@/components/Cart/CartItem/CartItem";
 import Container from "@/components/Container/Container";
 import ScreenLoading from "@/components/ScreenLoading/ScreenLoading";
-import { GetCartDetails } from "@/services/Cart/service";
-import { formatPrice } from "@/utils/formatPrice";
-import React, { Suspense, useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
+import {GetCartDetails, GetDiscountCart} from "@/services/Cart/service";
+import {formatPrice} from "@/utils/formatPrice";
+import React, {Suspense, useEffect, useState} from "react";
+import {useForm} from "react-hook-form";
+import {ToastContainer} from "react-toastify";
+
+type discountCode = {
+    code: string;
+};
 
 export default function Page() {
     const [cart, setCart] = useState<any>(undefined);
+    const [discountCode, setDiscountCode] = useState<string | undefined>(
+        undefined
+    );
+
+    const {
+        register,
+        handleSubmit,
+        setValue,
+    } = useForm<discountCode>();
+
+    const omSubmitDiscount = async (data: discountCode) => {
+        if (!discountCode) {
+            setDiscountCode(data.code);
+        } else {
+            setDiscountCode(undefined);
+            setValue("code", "");
+        }
+    };
 
     const getCartDetails = async () => {
         const response = await GetCartDetails();
-        console.log(response?.data);
         setCart(response?.data);
+    };
+
+    const getDiscountCartDetails = async (discountCode?: string) => {
+        const response = await GetDiscountCart(discountCode);
+        if (response) {
+            setCart(response?.data);
+        }
     };
 
     useEffect(() => {
         getCartDetails();
     }, []);
 
+    useEffect(() => {
+        if (discountCode) {
+            getDiscountCartDetails(discountCode);
+        } else {
+            getCartDetails();
+        }
+    }, [discountCode]);
+
     return (
-        <Suspense fallback={<ScreenLoading />}>
+        <Suspense fallback={<ScreenLoading/>}>
             <div className="bg-[#E1E4FA] min-h-dvh">
                 <Container className="pt-[169px]">
                     <div className="grid grid-cols-12 gap-6 min-h-dvh">
@@ -36,7 +73,7 @@ export default function Page() {
                                 ) : (
                                     <div className="flex flex-col gap-10 py-[39px] ps-[25px] pe-[30px] w-full">
                                         {cart?.items?.map(
-                                            (item: any, index: number) => {
+                                            (item: any) => {
                                                 return (
                                                     <CartItem
                                                         key={item?.product_id}
@@ -108,6 +145,33 @@ export default function Page() {
                                                 </span>
                                             </span>
                                         </div>
+                                        <form
+                                            onSubmit={handleSubmit(
+                                                omSubmitDiscount
+                                            )}
+                                            className="flex items-center justify-between w-full"
+                                        >
+                                            <span>
+                                                <input
+                                                    className="bg-white py-px px-[7px] rounded-[5px] focus-visible:outline-0"
+                                                    type="text"
+                                                    placeholder="کد تخفیف"
+                                                    {...register("code", {
+                                                        required: true,
+                                                    })}
+                                                />
+                                            </span>
+                                            <span className="text-secondary text-xs font-bold">
+                                                <button
+                                                    type="submit"
+                                                    className="bg-[#BBC1EF] text-secondary py-[6px] px-[10px] rounded-[5px] cursor-pointer"
+                                                >
+                                                    {!discountCode
+                                                        ? "تایید"
+                                                        : "حذف"}
+                                                </button>
+                                            </span>
+                                        </form>
                                     </div>
                                 )}
                             </div>
@@ -115,7 +179,7 @@ export default function Page() {
                     </div>
                 </Container>
             </div>
-            <ToastContainer />
+            <ToastContainer/>
         </Suspense>
     );
 }
