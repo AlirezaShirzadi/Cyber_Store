@@ -3,13 +3,14 @@
 import CartItem from "@/components/Cart/CartItem/CartItem";
 import Container from "@/components/Container/Container";
 import ScreenLoading from "@/components/ScreenLoading/ScreenLoading";
-import {GetCartDetails, GetCartHasPhysicalProduct, GetDiscountCart} from "@/services/Cart/service";
-import {formatPrice} from "@/utils/formatPrice";
-import React, {Suspense, useEffect, useState} from "react";
-import {useForm} from "react-hook-form";
-import {toast, ToastContainer} from "react-toastify";
+import { GetCartDetails, GetCartHasPhysicalProduct, GetDiscountCart } from "@/services/Cart/service";
+import { Checkout } from "@/services/Payment/service";
+import { formatPrice } from "@/utils/formatPrice";
+import React, { Suspense, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 type discountCode = {
     code: string;
@@ -23,11 +24,7 @@ export default function Page() {
         undefined
     );
 
-    const {
-        register,
-        handleSubmit,
-        setValue,
-    } = useForm<discountCode>();
+    const { register, handleSubmit, setValue } = useForm<discountCode>();
 
     const omSubmitDiscount = async (data: discountCode) => {
         if (!discountCode) {
@@ -49,7 +46,18 @@ export default function Page() {
             toast.info(response?.detail);
             router.push('/account/dashboard/address');
         } else if (response?.data?.has_address && response?.data?.has_valid_address) {
-
+            // Proceed to checkout when addresses are valid
+            const checkout = await Checkout(discountCode);
+            if (checkout?.detail) {
+                toast.success(checkout.detail);
+            }
+            if (checkout?.url) {
+                if (typeof window !== 'undefined') {
+                    window.location.href = checkout.url as string;
+                } else {
+                    router.push(checkout.url as string);
+                }
+            }
         }
     }
 

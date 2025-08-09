@@ -103,6 +103,14 @@ const endpoints = {
         get_orders: {
             url: () => `order/orders/`,
             method: `GET`,
+        },
+        get_order_by_id: {
+            url: (id: string) => `order/orders/${id}/`,
+            method: `GET`,
+        },
+        cancel_order: {
+            url: () => `order/orders/cancel/`,
+            method: `POST`,
         }
     },
     location: {
@@ -114,6 +122,20 @@ const endpoints = {
             url: (province_id: string) => `account/cities/${province_id}/`,
             method: `GET`,
         },
+    },
+    payment: {
+        checkout: {
+            url: () => `order/checkout/payment/`,
+            method: `POST`,
+        },
+        retry_checkout: {
+            url: () => `order/checkout/retry-payment`,
+            method: `POST`,
+        },
+        verify_payment: {
+            url: () => `order/verify/payment/`,
+            method: `GET`,
+        }
     }
 };
 

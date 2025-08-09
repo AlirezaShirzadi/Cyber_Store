@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef} from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { isAuthenticated, logout } from "@/services/Auth/service";
+import {isAuthenticated, logout} from "@/services/Auth/service";
 
 export default function TopMenu() {
     const [currentTime, setCurrentTime] = useState<string>("");
@@ -121,7 +121,8 @@ export default function TopMenu() {
                     {/* Search Icon and Input */}
                     <div className="relative">
                         {isSearchOpen ? (
-                            <div className="flex items-center bg-white rounded-full overflow-hidden pr-2 pl-1 py-1 border border-primary">
+                            <div
+                                className="flex items-center bg-white rounded-full overflow-hidden pr-2 pl-1 py-1 border border-primary">
                                 <input
                                     ref={searchInputRef}
                                     type="text"
@@ -220,13 +221,31 @@ export default function TopMenu() {
                                     } bg-[#BBC1EF] py-[9px] px-2.5 min-w-[129px] rounded-[7px] top-[calc(100%+20px)] -right-8`}
                                 >
                                     <Link
-                                        className="inline-block mb-4 text-secondary text-xs"
+                                        className="block mb-4 text-secondary text-xs"
+                                        href={`/account/dashboard`}
+                                        onClick={() => setShowDropdown(false)}
+                                    >
+                                        داشبورد
+                                    </Link>
+                                    <Link
+                                        className="block mb-4 text-secondary text-xs"
+                                        href={`/account/dashboard/address`}
+                                        onClick={() => setShowDropdown(false)}
+                                    >
+                                        آدرس ها
+                                    </Link>
+                                    <Link
+                                        className="block mb-4 text-secondary text-xs"
                                         href={`/account/dashboard/cart`}
+                                        onClick={() => setShowDropdown(false)}
                                     >
                                         سبد خرید
                                     </Link>
                                     <div
-                                        onClick={() => logout()}
+                                        onClick={() => {
+                                            setShowDropdown(false);
+                                            logout();
+                                        }}
                                         className="text-secondary text-xs cursor-pointer"
                                     >
                                         خروج از حساب کاربری
@@ -437,16 +456,34 @@ export default function TopMenu() {
                                 <div
                                     className={`absolute transition-all ${
                                         showDropdown ? "visible" : "hidden"
-                                    } bg-[#BBC1EF] py-[9px] px-2.5 min-w-[129px] rounded-[7px] -top-20 right-0 left-0`}
+                                    } bg-[#BBC1EF] py-[9px] px-2.5 min-w-[129px] rounded-[7px] -top-36 right-0 left-0`}
                                 >
                                     <Link
-                                        className="inline-block mb-4 text-secondary text-xs"
+                                        className="block mb-4 text-secondary text-xs"
+                                        href={`/account/dashboard`}
+                                        onClick={() => setShowDropdown(false)}
+                                    >
+                                        داشبورد
+                                    </Link>
+                                    <Link
+                                        className="block mb-4 text-secondary text-xs"
+                                        href={`/account/dashboard/address`}
+                                        onClick={() => setShowDropdown(false)}
+                                    >
+                                        آدرس ها
+                                    </Link>
+                                    <Link
+                                        className="block mb-4 text-secondary text-xs"
                                         href={`/account/dashboard/cart`}
+                                        onClick={() => setShowDropdown(false)}
                                     >
                                         سبد خرید
                                     </Link>
                                     <div
-                                        onClick={() => logout()}
+                                        onClick={() => {
+                                            setShowDropdown(false);
+                                            logout();
+                                        }}
                                         className="text-secondary text-xs cursor-pointer"
                                     >
                                         خروج از حساب کاربری

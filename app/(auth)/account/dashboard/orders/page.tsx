@@ -169,24 +169,24 @@ export default function Page() {
             </div>
             <div className="col-span-12 lg:col-span-9 mt-8 lg:mt-0">
                 <div className={`text-5xl font-bold text-secondary mb-[22px]`}>تاریخچه سفارشات</div>
-                <div className={`flex flex-wrap items-center gap-px mb-8`}>
-                    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>
-                        <span className={`inline-block me-2`}>{orderCounts.current + orderCounts.paid}</span>
-                        <span>جاری</span>
-                    </div>
-                    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>
-                        <span className={`inline-block me-2`}>{orderCounts.delivered}</span>
-                        <span>تحویل شده</span>
-                    </div>
-                    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>
-                        <span className={`inline-block me-2`}>{orderCounts.returned}</span>
-                        <span>مرجوع شده</span>
-                    </div>
-                    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>
-                        <span className={`inline-block me-2`}>{orderCounts.canceled}</span>
-                        <span>لغو شده</span>
-                    </div>
-                </div>
+                {/*<div className={`flex flex-wrap items-center gap-px mb-8`}>*/}
+                {/*    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>*/}
+                {/*        <span className={`inline-block me-2`}>{orderCounts.current + orderCounts.paid}</span>*/}
+                {/*        <span>جاری</span>*/}
+                {/*    </div>*/}
+                {/*    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>*/}
+                {/*        <span className={`inline-block me-2`}>{orderCounts.delivered}</span>*/}
+                {/*        <span>تحویل شده</span>*/}
+                {/*    </div>*/}
+                {/*    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>*/}
+                {/*        <span className={`inline-block me-2`}>{orderCounts.returned}</span>*/}
+                {/*        <span>مرجوع شده</span>*/}
+                {/*    </div>*/}
+                {/*    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>*/}
+                {/*        <span className={`inline-block me-2`}>{orderCounts.canceled}</span>*/}
+                {/*        <span>لغو شده</span>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
                 <div className={`space-y-[13px] max-h-[500px] overflow-y-auto`}>
                     {loading ? (
                         <div className="text-center py-4">در حال بارگذاری...</div>
