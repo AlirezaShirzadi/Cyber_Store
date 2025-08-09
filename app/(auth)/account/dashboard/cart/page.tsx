@@ -3,17 +3,21 @@
 import CartItem from "@/components/Cart/CartItem/CartItem";
 import Container from "@/components/Container/Container";
 import ScreenLoading from "@/components/ScreenLoading/ScreenLoading";
-import {GetCartDetails, GetDiscountCart} from "@/services/Cart/service";
+import {GetCartDetails, GetCartHasPhysicalProduct, GetDiscountCart} from "@/services/Cart/service";
 import {formatPrice} from "@/utils/formatPrice";
 import React, {Suspense, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
-import {ToastContainer} from "react-toastify";
+import {toast, ToastContainer} from "react-toastify";
+import Link from "next/link";
+import {useRouter} from "next/navigation";
 
 type discountCode = {
     code: string;
 };
 
 export default function Page() {
+    const router = useRouter();
+
     const [cart, setCart] = useState<any>(undefined);
     const [discountCode, setDiscountCode] = useState<string | undefined>(
         undefined
@@ -38,6 +42,16 @@ export default function Page() {
         const response = await GetCartDetails();
         setCart(response?.data);
     };
+
+    const getCartHasPhysicalItems = async () => {
+        const response = await GetCartHasPhysicalProduct();
+        if (!response?.data?.has_valid_address) {
+            toast.info(response?.detail);
+            router.push('/account/dashboard/address');
+        } else if (response?.data?.has_address && response?.data?.has_valid_address) {
+
+        }
+    }
 
     const getDiscountCartDetails = async (discountCode?: string) => {
         const response = await GetDiscountCart(discountCode);
@@ -172,6 +186,16 @@ export default function Page() {
                                                 </button>
                                             </span>
                                         </form>
+                                        <div className="flex items-center justify-between w-full">
+                                            {cart?.summary?.all_in_stock ?
+                                                <Link className={'w-full'} onClick={getCartHasPhysicalItems} href={'#'}>
+                                                    <div
+                                                        className={'bg-primary w-full rounded-[7px] py-[7px] px-3.5 text-white text-center'}>
+                                                        تکمیل سفارش
+                                                    </div>
+                                                </Link> : <div className={'text-red-500'}>امکان تکمیل سبد خرید شما وجود
+                                                    ندارد</div>}
+                                        </div>
                                     </div>
                                 )}
                             </div>

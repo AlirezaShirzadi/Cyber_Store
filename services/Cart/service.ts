@@ -61,3 +61,19 @@ export async function GetDiscountCart(code?: string) {
         console.log(error);
     }
 }
+
+export async function GetCartHasPhysicalProduct() {
+    try {
+        const response = await axiosInstanceWithAuth({
+            url: endpoints.cart.get_has_physical.url(),
+            method: endpoints.cart.get_has_physical.method,
+        })
+
+        if (response) {
+            return response;
+        }
+    } catch (error: any) {
+        console.log(error);
+        return error?.response
+    }
+}

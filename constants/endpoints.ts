@@ -68,6 +68,10 @@ const endpoints = {
             url: () => `order/basket/apply-discount/`,
             method: `GET`,
         },
+        get_has_physical: {
+            url: () => `order/basket/has-physical/`,
+            method: `GET`,
+        }
     },
     account: {
         get_basic_info: {
@@ -77,7 +81,39 @@ const endpoints = {
         update_account: {
             url: () => `account/profile-update/`,
             method: `PATCH`,
+        },
+        get_addresses: {
+            url: () => `account/addresses/`,
+            method: `GET`,
+        },
+        add_address: {
+            url: () => `account/addresses/`,
+            method: `POST`,
+        },
+        edit_address: {
+            url: (id: string) => `account/addresses/${id}/`,
+            method: `PATCH`,
+        },
+        get_address_by_id: {
+            url: (id: string) => `account/addresses/${id}/`,
+            method: `GET`,
         }
+    },
+    order: {
+        get_orders: {
+            url: () => `order/orders/`,
+            method: `GET`,
+        }
+    },
+    location: {
+        get_provinces: {
+            url: () => `account/provinces/`,
+            method: `GET`,
+        },
+        get_cities: {
+            url: (province_id: string) => `account/cities/${province_id}/`,
+            method: `GET`,
+        },
     }
 };
 

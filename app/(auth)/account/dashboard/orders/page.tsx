@@ -1,9 +1,23 @@
-"use client";
+"use client"
+
+import React, {useEffect, useState} from "react";
 import Container from "@/components/Container/Container";
-import { logout } from "@/services/Auth/service";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React from "react";
+import {logout} from "@/services/Auth/service";
+import {usePathname} from "next/navigation";
+import OrderItem from "@/components/Dashboard/OrderItem/OrderItem";
+import {GetOrders} from "@/services/Order/service";
+
+// Define interface for order data
+interface OrderData {
+    order_id: number;
+    status: string;
+    total_price: number;
+    order_tracking_code: string;
+    created_at: string;
+    updated_at: string;
+    seconds_remaining: number | null;
+}
 
 const sideItems = [
     {
@@ -90,63 +104,110 @@ const sideItems = [
 
 export default function Page() {
     const pathname = usePathname();
+    const [orders, setOrders] = useState<OrderData[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
-    return (
-        <div className="bg-[#E1E4FA] min-h-dvh">
-            <Container className="grid grid-cols-12 gap-x-6 items-center min-h-dvh py-24 lg:py-0">
-                <div className="col-span-12 lg:col-span-3">
-                    <div className="text-secondary text-2xl/[116%] font-extrabold">
-                        حساب کاربری من
+    // Count orders by status
+    const orderCounts = {
+        current: orders.filter(order => order.status === 'current').length,
+        delivered: orders.filter(order => order.status === 'delivered').length,
+        returned: orders.filter(order => order.status === 'returned').length,
+        canceled: orders.filter(order => order.status === 'canceled').length,
+        paid: orders.filter(order => order.status === 'paid').length
+    };
+
+    useEffect(() => {
+        setLoading(true);
+        GetOrders()
+            .then((res) => {
+                if (res?.data?.detail) {
+                    // Handle the case when there are no orders
+                    setError(res.data.detail);
+                    setOrders([]);
+                } else if (Array.isArray(res?.data)) {
+                    // Handle the case when there are orders
+                    setOrders(res.data);
+                    setError(null);
+                }
+            })
+            .catch((err) => {
+                setError("خطایی در دریافت سفارشات رخ داده است");
+                console.error(err);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
+    return <div className="bg-[#E1E4FA] min-h-dvh">
+        <Container className="grid grid-cols-12 gap-x-6 items-center min-h-dvh py-24 lg:py-0">
+            <div className="col-span-12 lg:col-span-3">
+                <div className="text-secondary text-2xl/[116%] font-extrabold">
+                    حساب کاربری من
+                </div>
+                <div className="w-full h-[1px] bg-[#BBC1EF] mt-[7px]"/>
+                <div className="w-full space-y-3.5 mt-3.5">
+                    {sideItems.map((item, index) => (
+                        <Link
+                            className={`block text-primary text-2xl/[116%] p-[7px] ${
+                                pathname === item.href &&
+                                "border border-[#BBC1EF] text-secondary rounded-[7px]"
+                            }`}
+                            key={"sideItem" + index}
+                            href={item.href}
+                            onClick={() => {
+                                if (item.title === "خروج") {
+                                    logout();
+                                }
+                            }}
+                        >
+                            {item.title}
+                        </Link>
+                    ))}
+                </div>
+            </div>
+            <div className="col-span-12 lg:col-span-9 mt-8 lg:mt-0">
+                <div className={`text-5xl font-bold text-secondary mb-[22px]`}>تاریخچه سفارشات</div>
+                <div className={`flex flex-wrap items-center gap-px mb-8`}>
+                    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>
+                        <span className={`inline-block me-2`}>{orderCounts.current + orderCounts.paid}</span>
+                        <span>جاری</span>
                     </div>
-                    <div className="w-full h-[1px] bg-[#BBC1EF] mt-[7px]" />
-                    <div className="w-full space-y-3.5 mt-3.5">
-                        {sideItems.map((item, index) => (
-                            <Link
-                                className={`block text-primary text-2xl/[116%] p-[7px] ${
-                                    pathname === item.href &&
-                                    "border border-[#BBC1EF] text-secondary rounded-[7px]"
-                                }`}
-                                key={"sideItem" + index}
-                                href={item.href}
-                                onClick={() => {
-                                    if (item.title === "خروج") {
-                                        logout();
-                                    }
-                                }}
-                            >
-                                {item.title}
-                            </Link>
-                        ))}
+                    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>
+                        <span className={`inline-block me-2`}>{orderCounts.delivered}</span>
+                        <span>تحویل شده</span>
+                    </div>
+                    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>
+                        <span className={`inline-block me-2`}>{orderCounts.returned}</span>
+                        <span>مرجوع شده</span>
+                    </div>
+                    <div className={`bg-[#BBC1EF] p-4 lg:min-w-[100px]`}>
+                        <span className={`inline-block me-2`}>{orderCounts.canceled}</span>
+                        <span>لغو شده</span>
                     </div>
                 </div>
-                <div className="col-span-12 lg:col-span-9 mt-8 lg:mt-0">
-                    <div className="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-[61px]">
-                        {sideItems?.map((item, index) => {
-                            if (index !== 0) {
-                                return (
-                                    <Link
-                                        key={"side_item" + index}
-                                        href={item.href}
-                                        className="col-span-12 lg:col-span-3 py-[70px] bg-[#BBC1EF40] rounded-[14px]"
-                                        onClick={() => {
-                                            if (item.title === "خروج") {
-                                                logout();
-                                            }
-                                        }}
-                                    >
-                                        <div className="size-[70px] mx-auto mb-4 lg:mb-[62px]">
-                                            {item.svg}
-                                        </div>
-                                        <div className="text-center text-primary text-2xl/[116%]">
-                                            {item.title}
-                                        </div>
-                                    </Link>
-                                );
-                            }
-                        })}
-                    </div>
+                <div className={`space-y-[13px] max-h-[500px] overflow-y-auto`}>
+                    {loading ? (
+                        <div className="text-center py-4">در حال بارگذاری...</div>
+                    ) : error ? (
+                        <div className="text-center py-4 text-red-500">{error}</div>
+                    ) : orders.length > 0 ? (
+                        orders.map((order) => (
+                            <OrderItem
+                                key={order.order_id}
+                                order_id={order.order_id}
+                                status={order.status}
+                                total_price={order.total_price}
+                                order_tracking_code={order.order_tracking_code}
+                                created_at={order.created_at}
+                            />
+                        ))
+                    ) : (
+                        <div className="text-center py-4">هیچ سفارشی یافت نشد</div>
+                    )}
                 </div>
-            </Container>
-        </div>
-    );
+            </div>
+        </Container>
+    </div>
 }
