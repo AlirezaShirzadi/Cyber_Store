@@ -136,6 +136,28 @@ const endpoints = {
             url: () => `order/verify/payment/`,
             method: `GET`,
         }
+    },
+    tickets: {
+        get_list: {
+            url: () => `tickets/list/`,
+            method: `GET`,
+        },
+        create: {
+            url: () => `tickets/create/`,
+            method: `POST`,
+        },
+        get_categories: {
+            url: () => `tickets/categories/`,
+            method: `GET`,
+        },
+        get_ticket_by_id: {
+            url: (ticketId: number) => `tickets/${ticketId}/`,
+            method: "GET"
+        },
+        create_message: {
+            url: (ticketId: number) => `tickets/${ticketId}/messages/`,
+            method: `POST`
+        }
     }
 };
 
