@@ -2,8 +2,6 @@
 
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Image from "next/image";
-import Link from "next/link";
 
 import "swiper/css";
 import ShopItem from "../ShopItem/ShopItem";

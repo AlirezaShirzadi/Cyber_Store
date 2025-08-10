@@ -78,7 +78,7 @@ export default function Page() {
 
   // Load address by id and prefill form
   useEffect(() => {
-    let mounted = true;
+    const mounted = true;
     async function loadAddress() {
       if (!id) return;
       setLoadingAddress(true);

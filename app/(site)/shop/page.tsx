@@ -7,7 +7,6 @@ import { GetShopItems } from "@/services/Shop/service";
 import ShopSlider from "@/components/ShopSlider/ShopSlider";
 import Pagination from "@/components/Pagination/Pagination";
 import Link from "next/link";
-import Image from "next/image";
 import ActiveShopCategoryIcon from "@/components/Icons/ActiveShopCategoryIcon";
 import ScreenLoading from "@/components/ScreenLoading/ScreenLoading";
 

@@ -106,13 +106,6 @@ const ProductFilters: React.FC<Props> = ({ filters, params }) => {
         });
     };
 
-    const handleRangeChange = (key: string, value: [number, number]) => {
-        setSelectedFilters((prev) => ({
-            ...prev,
-            [key]: { min: value[0], max: value[1] },
-        }));
-    };
-
     return (
         <div className="space-y-4 w-full max-w-md mx-auto">
             {Object.entries(filters).map(([key, filter]) => (

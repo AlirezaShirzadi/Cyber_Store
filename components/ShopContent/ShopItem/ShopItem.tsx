@@ -5,7 +5,7 @@ import { formatPrice } from "@/utils/formatPrice";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function ShopItem({ item, view, gridSize }: any) {
+export default function ShopItem({ item, view }: any) {
     return view === "items" ? (
         <div className={`col-span-12 md:col-span-6 lg:col-span-4`}>
             <Link className="block h-[148px] mb-2.5" href={`/shop/${item?.id}`}>

@@ -108,15 +108,6 @@ export default function Page() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    // Count orders by status
-    const orderCounts = {
-        current: orders.filter(order => order.status === 'current').length,
-        delivered: orders.filter(order => order.status === 'delivered').length,
-        returned: orders.filter(order => order.status === 'returned').length,
-        canceled: orders.filter(order => order.status === 'canceled').length,
-        paid: orders.filter(order => order.status === 'paid').length
-    };
-
     useEffect(() => {
         setLoading(true);
         GetOrders()

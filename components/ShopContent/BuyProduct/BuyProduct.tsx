@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 
 export default function BuyProduct({
     id,
-    is_physical,
     is_available,
     type,
     feature,
@@ -55,7 +54,7 @@ export default function BuyProduct({
             </button>
             {type === "gameaccount" && (
                 <div className="flex items-center gap-4 mt-4">
-                    {feature?.map((item: any, index: number) => (
+                    {feature?.map((item: any) => (
                         <div key={"feature" + item?.id}>
                             <input
                                 id={"feature" + item?.id}

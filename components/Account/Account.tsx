@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import OtpFieldGroup from "../Forms/OtpFieldGroup";
 import { useRouter } from "next/navigation";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { RequestOtp, VerifyOtp } from "@/services/Auth/service";
 import { toast, ToastContainer } from "react-toastify";
 

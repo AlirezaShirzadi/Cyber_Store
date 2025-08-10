@@ -5,8 +5,6 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/pagination'
-import Image from "next/image";
-import Link from "next/link";
 import BlogItem from "@/components/BlogItem/BlogItem";
 
 export default function ClientBlogSlider() {
