@@ -4,16 +4,15 @@ import StoreSlider from "@/components/StoreSlider/StoreSlider";
 import HeroSlider from "@/components/HeroSlider/HeroSlider";
 import Image from "next/image";
 import HeadsetSlider from "@/components/HeadsetSlider/HeadsetSlider";
-import React, { Suspense } from "react";
+import React from "react";
 import PlanSlider from "@/components/PlanSlider/PlanSlider";
 import BlogSlider from "@/components/BlogSlider/BlogSlider";
 import ConsoleSlider from "@/components/ConsoleSlider/ConsoleSlider";
 import AnimatedBackground from "@/components/AnimatedBackground/AnimatedBackground";
-import ScreenLoading from "@/components/ScreenLoading/ScreenLoading";
 
 export default async function Home() {
     return (
-        <Suspense fallback={<ScreenLoading />}>
+            <>
             <AnimatedBackground />
             <Container>
                 <section className={`pb-6 lg:pb-[167px] pt-[197px]`}>
@@ -201,6 +200,6 @@ export default async function Home() {
                     </p>
                 </section>
             </Container>
-        </Suspense>
+            </>
     );
 }

@@ -1,14 +1,13 @@
 "use client";
 
 import Container from "@/components/Container/Container";
-import ScreenLoading from "@/components/ScreenLoading/ScreenLoading";
 import { GetOrderById, CancelOrder } from "@/services/Order/service";
 import { RetryCheckout } from "@/services/Payment/service";
 import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 
 interface OrderItem {
@@ -93,7 +92,7 @@ export default function Page() {
     : "";
 
   return (
-    <Suspense fallback={<ScreenLoading />}>
+      <>
       <div className="bg-[#E1E4FA] min-h-dvh">
         <Container className="pt-[169px]">
           <div className="grid grid-cols-12 gap-6 min-h-dvh">
@@ -226,6 +225,6 @@ export default function Page() {
         </Container>
       </div>
       <ToastContainer />
-    </Suspense>
+      </>
   );
 }

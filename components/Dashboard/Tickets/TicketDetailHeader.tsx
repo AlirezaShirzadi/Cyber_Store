@@ -13,7 +13,7 @@ interface TicketDetailHeaderProps {
 
 export default function TicketDetailHeader({ subject, category, status, created_at, last_updated }: TicketDetailHeaderProps) {
   return (
-    <div className="bg-white border border-[#BBC1EF] rounded-[7px] p-4 space-y-2">
+    <div className="bg-transparent border border-[#BBC1EF] rounded-[7px] p-4 space-y-2">
       <div className="flex flex-wrap items-center gap-2 justify-between">
         <div className="font-bold text-secondary line-clamp-2">{subject}</div>
         <div className="text-sm text-secondary font-semibold">وضعیت: {statusText(status)}</div>

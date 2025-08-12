@@ -13,8 +13,10 @@ export default function BuyProduct({
     feature,
 }: any) {
     const [isAuthed, setIsAuthed] = useState<boolean>(false);
+    const isAccountType =
+        typeof type === "string" && type.toLowerCase().includes("account");
     const [productIdSelected, setProductIdSelected] = useState(
-        type === "gameaccount" ? feature[0]?.id : "0"
+        isAccountType ? feature?.[0]?.id?.toString() ?? "0" : "0"
     );
 
     useEffect(() => {
@@ -32,7 +34,7 @@ export default function BuyProduct({
             product_id: Number(id),
             quantity_change: 1,
             game_account_id:
-                type === "gameaccount" ? Number(productIdSelected) : undefined,
+                isAccountType ? Number(productIdSelected) : undefined,
         });
 
         if (response) {
@@ -52,7 +54,7 @@ export default function BuyProduct({
                     <span>ناموجود</span>
                 )}
             </button>
-            {type === "gameaccount" && (
+            {isAccountType && (
                 <div className="flex items-center gap-4 mt-4">
                     {feature?.map((item: any) => (
                         <div key={"feature" + item?.id}>
@@ -61,7 +63,7 @@ export default function BuyProduct({
                                 name="feature"
                                 type="radio"
                                 value={item?.id}
-                                defaultChecked={productIdSelected === item?.id}
+                                defaultChecked={String(productIdSelected) === String(item?.id)}
                                 onChange={(e) =>
                                     setProductIdSelected(e.target.value)
                                 }

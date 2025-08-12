@@ -150,7 +150,7 @@ export default function AddTicketPage() {
                     <div className={`text-secondary text-3xl lg:text-5xl font-bold`}>ایجاد تیکت جدید</div>
 
                     <form onSubmit={handleSubmit(onSubmit)}
-                          className="bg-white rounded-[7px] p-4 border border-[#BBC1EF] space-y-4">
+                          className="bg-transparent rounded-[7px] p-4 border border-[#BBC1EF] space-y-4">
                         <div>
                             <label className="block text-secondary font-bold mb-1">موضوع</label>
                             <input
@@ -166,7 +166,7 @@ export default function AddTicketPage() {
                         <div>
                             <label className="block text-secondary font-bold mb-1">دسته‌بندی</label>
                             <select
-                                className="w-full border border-[#BBC1EF] rounded-[7px] p-2 bg-white"
+                                className="w-full border border-[#BBC1EF] rounded-[7px] p-2 bg-transparent"
                                 {...register("category", {required: "این فیلد الزامی است"})}
                                 defaultValue=""
                             >

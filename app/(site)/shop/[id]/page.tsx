@@ -1,5 +1,4 @@
 import Container from "@/components/Container/Container";
-import ScreenLoading from "@/components/ScreenLoading/ScreenLoading";
 import BuyProduct from "@/components/ShopContent/BuyProduct/BuyProduct";
 import RelatedProductsSlider from "@/components/ShopContent/RelatedProductsSlider/RelatedProductsSlider";
 import ShopItem from "@/components/ShopContent/ShopItem/ShopItem";
@@ -11,7 +10,6 @@ import {
 } from "@/services/Shop/service";
 import { formatPrice } from "@/utils/formatPrice";
 import Image from "next/image";
-import { Suspense } from "react";
 import { ToastContainer } from "react-toastify";
 
 export default async function Page({ params }: { params: { id: string } }) {
@@ -21,7 +19,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     const relatedProducts = await GetRelatedProducts(id);
 
     return (
-        <Suspense fallback={<ScreenLoading />}>
+            <>
             <div className="bg-[#E1E4FA]">
                 <Container>
                     <section className="pt-24 pb-4 lg:py-[157px]">
@@ -207,6 +205,6 @@ export default async function Page({ params }: { params: { id: string } }) {
                 </Container>
             </div>
             <ToastContainer />
-        </Suspense>
+            </>
     );
 }

@@ -12,22 +12,17 @@ interface TicketsListItemProps {
   last_updated?: string;
 }
 
-function formatTehranTimeHM(iso: string) {
+function formatDateFa(iso: string) {
   try {
-    return new Date(iso).toLocaleTimeString("fa-IR", {
-      timeZone: "Asia/Tehran",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    });
+    return new Date(iso).toLocaleDateString("fa-IR");
   } catch {
-    return "--:--";
+    return "--/--/--";
   }
 }
 
 export default function TicketsListItem({ id, subject, category, status, created_at, last_updated }: TicketsListItemProps) {
-  const createdHM = formatTehranTimeHM(created_at);
-  const updatedHM = last_updated ? formatTehranTimeHM(last_updated) : undefined;
+  const createdDate = formatDateFa(created_at);
+  const updatedDate = last_updated ? formatDateFa(last_updated) : undefined;
 
   const statusText = (s: string) => {
     switch (s) {
@@ -43,12 +38,19 @@ export default function TicketsListItem({ id, subject, category, status, created
   };
 
   return (
-    <Link href={`/account/dashboard/tickets/${id}`} className="bg-white rounded-[7px] p-3 flex flex-col md:flex-row md:items-center md:justify-between border border-[#BBC1EF] hover:border-primary transition-colors">
-      <div className="font-bold text-secondary line-clamp-1">{subject}</div>
-      <div className="text-sm text-primary">دسته: {category}</div>
-      <div className="text-sm text-secondary font-semibold">وضعیت: {statusText(status)}</div>
-      <div className="text-xs text-gray-500">ایجاد: {createdHM}</div>
-      {updatedHM && <div className="text-xs text-gray-400">بروزرسانی: {updatedHM}</div>}
+    <Link
+      href={`/account/dashboard/tickets/${id}`}
+      className={`flex flex-wrap items-center border border-[#BBC1EF] rounded-[7px] justify-between w-full py-4 px-2`}
+    >
+      <div className={`line-clamp-1 text-sm font-medium text-secondary`}>
+        {subject}
+      </div>
+      <div className={`text-secondary text-xs`}>دسته: {category}</div>
+      <div className={`text-secondary text-xs`}>وضعیت: {statusText(status)}</div>
+      <div className={`text-secondary text-xs`}>{createdDate}</div>
+      {updatedDate && (
+        <div className={`text-secondary text-xs`}>بروزرسانی: {updatedDate}</div>
+      )}
     </Link>
   );
 }

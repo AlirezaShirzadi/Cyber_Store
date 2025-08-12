@@ -2,11 +2,10 @@
 
 import CartItem from "@/components/Cart/CartItem/CartItem";
 import Container from "@/components/Container/Container";
-import ScreenLoading from "@/components/ScreenLoading/ScreenLoading";
 import { GetCartDetails, GetCartHasPhysicalProduct, GetDiscountCart } from "@/services/Cart/service";
 import { Checkout } from "@/services/Payment/service";
 import { formatPrice } from "@/utils/formatPrice";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
@@ -81,7 +80,7 @@ export default function Page() {
     }, [discountCode]);
 
     return (
-        <Suspense fallback={<ScreenLoading/>}>
+            <>
             <div className="bg-[#E1E4FA] min-h-dvh">
                 <Container className="pt-[169px]">
                     <div className="grid grid-cols-12 gap-6 min-h-dvh">
@@ -212,6 +211,6 @@ export default function Page() {
                 </Container>
             </div>
             <ToastContainer/>
-        </Suspense>
+            </>
     );
 }

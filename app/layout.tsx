@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import TanStackProvider from "@/services/TanStackProvider/QueryClientProvider";
 
 const Vazir = localFont({
     src: [
@@ -53,17 +52,18 @@ const Vazir = localFont({
     variable: "--font-vazir",
 });
 
+import TopLoaderClient from "@/components/TopLoader/TopLoaderClient";
+
 export default async function RootLayout({
-    children,
-}: Readonly<{
+                                             children,
+                                         }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
         <html lang="fa" dir="rtl" className={`${Vazir.variable} bg-[#E1E4FA]`}>
             <body className={`${Vazir.className} antialiased`}>
-                <TanStackProvider>
-                    {children}
-                </TanStackProvider>
+                <TopLoaderClient />
+                {children}
             </body>
         </html>
     );

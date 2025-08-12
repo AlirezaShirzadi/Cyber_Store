@@ -111,7 +111,7 @@ const ProductFilters: React.FC<Props> = ({ filters, params }) => {
             {Object.entries(filters).map(([key, filter]) => (
                 <div
                     key={key}
-                    className="border rounded-lg p-4 bg-white shadow-sm"
+                    className="border border-primary p-4 bg-transparent shadow-sm"
                 >
                     <div
                         className="flex justify-between items-center cursor-pointer mb-2"
@@ -127,7 +127,7 @@ const ProductFilters: React.FC<Props> = ({ filters, params }) => {
                                 (filter.options as string[]).map((option) => (
                                     <label
                                         key={option}
-                                        className="flex items-center gap-2"
+                                        className="flex items-center gap-2 text-secondary"
                                     >
                                         <input
                                             type="checkbox"
@@ -149,7 +149,7 @@ const ProductFilters: React.FC<Props> = ({ filters, params }) => {
                                 (filter.options as boolean[]).map((option) => (
                                     <label
                                         key={String(option)}
-                                        className="flex items-center gap-2"
+                                        className="flex items-center gap-2 text-secondary"
                                     >
                                         <input
                                             type="radio"

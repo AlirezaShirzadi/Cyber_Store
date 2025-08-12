@@ -90,7 +90,7 @@ export default function TicketDetailPage() {
                 last_updated={detail.last_updated}
               />
 
-              <div className="bg-white border border-[#BBC1EF] rounded-[7px] p-4">
+              <div className="bg-transparent border border-[#BBC1EF] rounded-[7px] p-4">
                 <ChatParticipantsHeader first={participants.first ?? undefined} second={participants.second ?? undefined} />
                 <ChatThread messages={detail.messages} firstSender={participants.first ?? undefined} />
               </div>

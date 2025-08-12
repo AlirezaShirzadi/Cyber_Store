@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { redirect } from "next/navigation";
 
 import Container from "@/components/Container/Container";
@@ -8,7 +8,6 @@ import ShopSlider from "@/components/ShopSlider/ShopSlider";
 import Pagination from "@/components/Pagination/Pagination";
 import Link from "next/link";
 import ActiveShopCategoryIcon from "@/components/Icons/ActiveShopCategoryIcon";
-import ScreenLoading from "@/components/ScreenLoading/ScreenLoading";
 
 const shopMenuItems = [
     {
@@ -55,11 +54,7 @@ export default async function Page({
     const allShopItems = await GetShopItems(page, 12, category);
 
     return (
-        <Suspense
-            fallback={
-                <ScreenLoading />
-            }
-        >
+            <>
             <div className={`bg-[#E1E4FA] min-h-dvh`}>
                 <Container>
                     <section>
@@ -119,6 +114,6 @@ export default async function Page({
                     </section>
                 </Container>
             </div>
-        </Suspense>
+            </>
     );
 }

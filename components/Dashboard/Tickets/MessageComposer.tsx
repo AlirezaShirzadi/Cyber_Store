@@ -85,7 +85,7 @@ export default function MessageComposer({ ticketId, onSent }: MessageComposerPro
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-white border border-[#BBC1EF] rounded-[7px] p-4 space-y-3">
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-transparent border border-[#BBC1EF] rounded-[7px] p-4 space-y-3">
       <div>
         <label className="block text-secondary font-bold mb-1">پیام</label>
         <textarea
