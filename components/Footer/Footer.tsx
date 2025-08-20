@@ -190,31 +190,31 @@ export default function Footer() {
                     <div className={`space-y-6 text-center lg:text-start`}>
                         <Link
                             className={`text-2xl/[116%] text-primary font-medium block`}
-                            href={`#`}
+                            href={`/`}
                         >
                             خانه
                         </Link>
                         <Link
                             className={`text-2xl/[116%] text-primary font-medium block`}
-                            href={`#`}
+                            href={`/shop`}
                         >
                             فروشگاه
                         </Link>
                         <Link
                             className={`text-2xl/[116%] text-primary font-medium block`}
-                            href={`#`}
+                            href={`/about`}
                         >
                             درباره ما
                         </Link>
                         <Link
                             className={`text-2xl/[116%] text-primary font-medium block`}
-                            href={`#`}
+                            href={`/contact`}
                         >
                             تماس با ما
                         </Link>
                         <Link
                             className={`text-2xl/[116%] text-primary font-medium block`}
-                            href={`#`}
+                            href={`/blog`}
                         >
                             وبلاگ
                         </Link>
