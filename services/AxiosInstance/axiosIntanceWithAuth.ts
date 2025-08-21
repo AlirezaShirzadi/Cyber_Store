@@ -1,7 +1,11 @@
 import axios from "axios";
 
+const isServer = typeof window === 'undefined';
+const serverBase = process.env.NEXT_INTERNAL_API_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL;
+const clientBase = process.env.NEXT_PUBLIC_BASE_URL;
+
 const axiosInstanceWithAuth = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL, 
+  baseURL: isServer ? serverBase : clientBase,
   withCredentials: true,
 });
 
