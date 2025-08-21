@@ -20,11 +20,11 @@ function formatDate(iso?: string) {
     }
 }
 
-export default async function Page({searchParams}: { searchParams?: { page?: string } }) {
-    const page = Number(searchParams?.page ?? 1) || 1;
+export default async function Page({searchParams}: { searchParams: Promise<{ page?: string }> }) {
+    const { page } = await searchParams;
     const pageSize = 8;
 
-    const data = await getBlogList(page, pageSize);
+    const data = await getBlogList(Number(page) || 1, pageSize);
 
     return (
         <div className={`bg-[#E1E4FA] lg:pb-[167px] pt-[130px]`}>
@@ -72,7 +72,7 @@ export default async function Page({searchParams}: { searchParams?: { page?: str
 
                 {/* Pagination */}
                 <BlogPagination
-                    currentPage={page}
+                    currentPage={Number(page)}
                     pageSize={pageSize}
                     totalItems={data?.count ?? 0}
                 />

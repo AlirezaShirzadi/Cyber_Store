@@ -45,7 +45,7 @@ const OtpFieldGroup: React.FC<Props> = ({ name, length, watch, setValue }) => {
             {Array.from({ length }).map((_, i) => (
                 <input
                     key={i}
-                    ref={(el) => (inputsRef.current[i] = el)}
+                    ref={(el) => { inputsRef.current[i] = el; }}
                     type="text"
                     inputMode="numeric"
                     maxLength={1}

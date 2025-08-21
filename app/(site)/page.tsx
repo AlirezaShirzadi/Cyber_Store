@@ -10,6 +10,8 @@ import BlogSlider from "@/components/BlogSlider/BlogSlider";
 import ConsoleSlider from "@/components/ConsoleSlider/ConsoleSlider";
 import AnimatedBackground from "@/components/AnimatedBackground/AnimatedBackground";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
     return (
             <>

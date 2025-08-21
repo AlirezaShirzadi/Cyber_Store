@@ -1,9 +1,9 @@
 import React from "react";
-import { redirect } from "next/navigation";
+import {redirect} from "next/navigation";
 
 import Container from "@/components/Container/Container";
 import Shop from "@/components/ShopContent/Shop";
-import { GetShopItems } from "@/services/Shop/service";
+import {GetShopItems} from "@/services/Shop/service";
 import ShopSlider from "@/components/ShopSlider/ShopSlider";
 import Pagination from "@/components/Pagination/Pagination";
 import Link from "next/link";
@@ -37,24 +37,23 @@ const shopMenuItems = [
 ];
 
 export default async function Page({
-    searchParams,
-}: {
-    searchParams: {
+                                       searchParams,
+                                   }: {
+    searchParams: Promise<{
         page?: string;
         category?: string;
-    };
+    }>;
 }) {
-    const page = parseInt(searchParams?.page || "1");
-    const category = searchParams?.category || "";
+    const {page, category} = await searchParams
 
     if (!page || !category) {
         redirect("/shop?page=1&category=all");
     }
 
-    const allShopItems = await GetShopItems(page, 12, category);
+    const allShopItems = await GetShopItems(Number(page), 12, category);
 
     return (
-            <>
+        <>
             <div className={`bg-[#E1E4FA] min-h-dvh`}>
                 <Container>
                     <section>
@@ -75,10 +74,10 @@ export default async function Page({
                                             >
                                                 {category ===
                                                     item?.category && (
-                                                    <div className="absolute hidden lg:block lg:left-full">
-                                                        <ActiveShopCategoryIcon />
-                                                    </div>
-                                                )}
+                                                        <div className="absolute hidden lg:block lg:left-full">
+                                                            <ActiveShopCategoryIcon/>
+                                                        </div>
+                                                    )}
                                                 <Link href={item?.url}>
                                                     {item?.name}
                                                 </Link>
@@ -90,7 +89,7 @@ export default async function Page({
                             <div
                                 className={`col-span-12 lg:col-span-10 order-1 lg:order-2`}
                             >
-                                <ShopSlider />
+                                <ShopSlider/>
                             </div>
                         </div>
                         <div className={`grid grid-cols-12 gap-6`}>
@@ -100,10 +99,10 @@ export default async function Page({
                             <div
                                 className={`col-span-12 lg:col-span-10 order-1 lg:order-2`}
                             >
-                                <Shop allShopItems={allShopItems?.data} />
+                                <Shop allShopItems={allShopItems?.data}/>
                                 <div className="mb-4">
                                     <Pagination
-                                        currentPage={page}
+                                        currentPage={Number(page)}
                                         pageSize={12}
                                         totalItems={allShopItems?.data?.count}
                                         category={category}
@@ -114,6 +113,6 @@ export default async function Page({
                     </section>
                 </Container>
             </div>
-            </>
+        </>
     );
 }

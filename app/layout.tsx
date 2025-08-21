@@ -60,7 +60,6 @@ export const metadata: Metadata = {
             follow: true,
         },
     },
-    themeColor: "#0A0F2B",
     icons: {
         icon: "/logo.png",
         apple: "/logo.png",

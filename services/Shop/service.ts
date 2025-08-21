@@ -1,6 +1,5 @@
 import axiosIntance from "@/services/AxiosInstance/axiosIntance";
 import endpoints from "@/constants/endpoints";
-import { json } from "stream/consumers";
 import axiosInstance from "@/services/AxiosInstance/axiosIntance";
 
 export async function GetShopSlider() {

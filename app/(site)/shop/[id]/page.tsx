@@ -8,18 +8,18 @@ import {
     GetRelatedProducts,
     GetShopItemDetails,
 } from "@/services/Shop/service";
-import { formatPrice } from "@/utils/formatPrice";
+import {formatPrice} from "@/utils/formatPrice";
 import Image from "next/image";
-import { ToastContainer } from "react-toastify";
+import {ToastContainer} from "react-toastify";
 
-export default async function Page({ params }: { params: { id: string } }) {
-    const id = params.id;
+export default async function Page({params}: { params: Promise<{ id: string }> }) {
+    const {id} = await params;
 
     const shopItemDetails = await GetShopItemDetails(id);
     const relatedProducts = await GetRelatedProducts(id);
 
     return (
-            <>
+        <>
             <div className="bg-[#E1E4FA]">
                 <Container>
                     <section className="pt-24 pb-4 lg:py-[157px]">
@@ -32,7 +32,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     <div>
                                         {!shopItemDetails?.data
                                             ?.has_discount ? (
-                                            <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4">
+                                            <div
+                                                className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4">
                                                 <span>
                                                     {formatPrice(
                                                         shopItemDetails?.data
@@ -43,7 +44,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                                             </div>
                                         ) : (
                                             <div className="flex flex-wrap lg:flex-nowrap items-center lg:gap-10">
-                                                <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4 line-through text-black/50">
+                                                <div
+                                                    className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4 line-through text-black/50">
                                                     <span>
                                                         {formatPrice(
                                                             shopItemDetails
@@ -52,7 +54,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                                                     </span>
                                                     <span>تومان</span>
                                                 </div>
-                                                <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4">
+                                                <div
+                                                    className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4">
                                                     <span>
                                                         {formatPrice(
                                                             shopItemDetails
@@ -90,7 +93,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                                         })}
                                     </div>
                                 </div>
-                                <div className="bg-[#BBC1EF] h-0.5 w-full max-w-[354px] mb-[21px]" />
+                                <div className="bg-[#BBC1EF] h-0.5 w-full max-w-[354px] mb-[21px]"/>
                                 <BuyProduct
                                     id={id}
                                     is_physical={
@@ -121,19 +124,19 @@ export default async function Page({ params }: { params: { id: string } }) {
                             <div className="grid grid-cols-12 gap-6 items-center">
                                 {shopItemDetails?.data?.galleries?.length >
                                     0 && (
-                                    <div
-                                        className={`col-span-12 ${
-                                            shopItemDetails?.data
-                                                ?.description && "lg:col-span-6"
-                                        }`}
-                                    >
-                                        <ShopItemSlider
-                                            data={
-                                                shopItemDetails?.data?.galleries
-                                            }
-                                        />
-                                    </div>
-                                )}
+                                        <div
+                                            className={`col-span-12 ${
+                                                shopItemDetails?.data
+                                                    ?.description && "lg:col-span-6"
+                                            }`}
+                                        >
+                                            <ShopItemSlider
+                                                data={
+                                                    shopItemDetails?.data?.galleries
+                                                }
+                                            />
+                                        </div>
+                                    )}
                                 {shopItemDetails?.data?.description && (
                                     <div
                                         className={`col-span-12 ${
@@ -204,7 +207,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     )}
                 </Container>
             </div>
-            <ToastContainer />
-            </>
+            <ToastContainer/>
+        </>
     );
 }

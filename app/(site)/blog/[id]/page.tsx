@@ -18,9 +18,10 @@ function formatDate(iso?: string) {
     }
 }
 
-export default async function BlogDetailPage({params}: { params: { id: string } }) {
+export default async function BlogDetailPage({params}: { params: Promise<{ id: string }> }) {
     try {
-        const post = await getBlogById(params.id);
+        const {id} = await params
+        const post = await getBlogById(id);
 
         return (
             <div className={`bg-[#E1E4FA] lg:pb-[167px] pt-[197px]`}>

@@ -38,7 +38,6 @@ const AnimatedBackground = () => {
                                 enable: true,
                                 mode: "bubble"
                             },
-                            resize: true
                         },
                         modes: {
                             bubble: {
@@ -66,13 +65,11 @@ const AnimatedBackground = () => {
                         },
                         move: {
                             enable: true,
-                            outMode: "out",
                             speed: 2
                         },
                         number: {
                             density: {
                                 enable: true,
-                                area: 800
                             },
                             value: 25
                         },
