@@ -158,6 +158,16 @@ const endpoints = {
             url: (ticketId: number) => `tickets/${ticketId}/messages/`,
             method: `POST`
         }
+    },
+    blog: {
+        get_list: {
+            url: () => `blog/`,
+            method: "GET"
+        },
+        get_single: {
+            url: (id: string | number) => `blog/${id}/`,
+            method: "GET"
+        }
     }
 };
 
