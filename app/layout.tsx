@@ -1,5 +1,71 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: {
+        default: "سایبر پلی استور | فروشگاه بازی و لوازم گیمینگ",
+        template: "%s | سایبر پلی استور",
+    },
+    description:
+        "خرید کنسول، اکانت قانونی، بازی‌های پلی‌استیشن، گیفت کارت، پلاس و لوازم جانبی با ارسال سریع و پشتیبانی ۷/۲۴. تجربه خرید مطمئن در Cyber PlayStore.",
+    keywords: [
+        "فروشگاه بازی",
+        "اکانت قانونی",
+        "پلی استیشن",
+        "گیفت کارت",
+        "بازی پلی استیشن",
+        "خرید بازی",
+        "لوازم گیمینگ",
+        "سایبر پلی استور",
+    ],
+    applicationName: "سایبر پلی استور",
+    authors: [{ name: "Cyber PlayStore" }],
+    creator: "Cyber PlayStore",
+    metadataBase: undefined,
+    alternates: {
+        canonical: "/",
+    },
+    openGraph: {
+        title: "سایبر پلی استور | فروشگاه بازی و لوازم گیمینگ",
+        description:
+            "خرید کنسول، اکانت قانونی، بازی‌های پلی‌استیشن، گیفت کارت، پلاس و لوازم جانبی با ارسال سریع و پشتیبانی ۷/۲۴.",
+        siteName: "سایبر پلی استور",
+        type: "website",
+        locale: "fa_IR",
+        url: "/",
+        images: [
+            {
+                url: "/logo.png",
+                width: 1200,
+                height: 630,
+                alt: "لوگوی سایبر پلی استور",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "سایبر پلی استور | فروشگاه بازی و لوازم گیمینگ",
+        description:
+            "خرید کنسول، اکانت قانونی، بازی‌های پلی‌استیشن، گیفت کارت، پلاس و لوازم جانبی با ارسال سریع و پشتیبانی.",
+        images: [
+            "/logo.png",
+        ],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+        },
+    },
+    themeColor: "#0A0F2B",
+    icons: {
+        icon: "/logo.png",
+        apple: "/logo.png",
+    },
+};
 
 const Vazir = localFont({
     src: [
