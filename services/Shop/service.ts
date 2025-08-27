@@ -12,8 +12,10 @@ export async function GetShopSlider() {
         if (response) {
             return response;
         }
+        throw new Error('Empty response');
     } catch (error) {
-        console.error(error);
+        console.error('Failed to fetch shop slider:', error);
+        throw error;
     }
 }
 
@@ -36,8 +38,10 @@ export async function GetShopItems(
         if (response) {
             return response;
         }
+        throw new Error('Empty response');
     } catch (error) {
-        console.error(error);
+        console.error('Failed to fetch shop items:', error);
+        throw error;
     }
 }
 
@@ -51,8 +55,10 @@ export async function GetShopItemDetails(id: string) {
         if (response) {
             return response;
         }
+        throw new Error('Empty response');
     } catch (error) {
-        console.log(error);
+        console.error('Failed to fetch shop item details:', error);
+        throw error;
     }
 }
 
@@ -69,7 +75,9 @@ export async function GetRelatedProducts(id: string) {
         if (response) {
             return response;
         }
+        throw new Error('Empty response');
     } catch (error) {
-        console.log(error);
+        console.error('Failed to fetch related products:', error);
+        throw error;
     }
 }

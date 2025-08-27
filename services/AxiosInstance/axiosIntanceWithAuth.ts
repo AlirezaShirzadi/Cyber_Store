@@ -7,6 +7,7 @@ const clientBase = process.env.NEXT_PUBLIC_BASE_URL;
 const axiosInstanceWithAuth = axios.create({
   baseURL: isServer ? serverBase : clientBase,
   withCredentials: true,
+  timeout: 15000,
 });
 
 axiosInstanceWithAuth.interceptors.request.use(
@@ -24,6 +25,17 @@ axiosInstanceWithAuth.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+
+    // Normalize network/timeout errors early for auth instance as well
+    const isTimeout = error.code === 'ECONNABORTED' || error.message?.toLowerCase().includes('timeout');
+    if (!error.response || isTimeout) {
+      const enhanced = new Error('Network error: unable to reach the server. Please try again.');
+      // @ts-expect-error attach original
+      enhanced.cause = error;
+      // @ts-expect-error name override for easier detection
+      enhanced.name = 'NetworkError';
+      return Promise.reject(enhanced);
+    }
 
     if (
       error.response?.status === 401 &&

@@ -14,10 +14,12 @@ export default function SearchPagination({
     totalItems,
 }: Props) {
     const router = useRouter();
-    const totalPages = Math.ceil(totalItems / pageSize);
+    const totalPages = Math.ceil((totalItems || 0) / pageSize);
     const searchParams = useSearchParams();
 
     const handlePageChange = (newPage: number) => {
+        // Guard invalid navigation
+        if (!totalPages || newPage < 1 || newPage > totalPages || newPage === currentPage) return;
         const params = new URLSearchParams(searchParams.toString());
         params.set("page", newPage.toString());
         params.set("pageSize", pageSize.toString());
@@ -57,6 +59,8 @@ export default function SearchPagination({
 
     const pages = generatePages();
 
+    if (!totalItems || totalPages <= 1) return null;
+
     return (
         <div className="flex gap-2 mt-8 justify-center">
             {pages.map((page, index) =>
@@ -73,6 +77,8 @@ export default function SearchPagination({
                                 ? "bg-secondary text-white"
                                 : "bg-transparent text-primary"
                         }`}
+                        disabled={currentPage === page}
+                        aria-current={currentPage === page ? 'page' : undefined}
                     >
                         {page}
                     </button>

@@ -43,7 +43,8 @@ export async function getBlogList(page: number = 1, page_size: number = 8) {
         });
         return data as BlogListResponse;
     } catch (error) {
-        console.log(error);
+        console.error('Failed to fetch blog list:', error);
+        throw error; // Let Next.js error boundary show a friendly error page
     }
 }
 

@@ -11,6 +11,7 @@ export const getHeroSlide = async () => {
         return response.data;
     } catch (error) {
         console.log(error);
+        throw error
     }
 };
 
@@ -26,6 +27,7 @@ export const getSecondarySlide = async () => {
         }
     } catch (error) {
         console.log(error);
+        throw error
     }
 };
 
@@ -41,5 +43,6 @@ export const getBestSellingProducts = async () => {
         }
     } catch (error) {
         console.log(error);
+        throw error
     }
 };

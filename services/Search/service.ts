@@ -11,8 +11,10 @@ export async function GetProductFilters() {
         if (response) {
             return response;
         }
+        throw new Error('Empty response');
     } catch (error) {
-        console.log(error);
+        console.error('Failed to fetch product filters:', error);
+        throw error;
     }
 }
 
@@ -30,7 +32,9 @@ export async function GetSearchProductFilters(params: any) {
         if (response) {
             return response;
         }
+        throw new Error('Empty response');
     } catch (error) {
-        console.log(error);
+        console.error('Failed to fetch search results:', error);
+        throw error;
     }
 }
