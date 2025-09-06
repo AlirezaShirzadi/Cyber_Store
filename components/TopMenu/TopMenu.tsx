@@ -2,7 +2,9 @@
 import React, {useEffect, useState, useRef} from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {isAuthenticated, logout} from "@/services/Auth/service";
+import { GetAccountInfo } from "@/services/Account/service";
 
 export default function TopMenu() {
     const [currentTime, setCurrentTime] = useState<string>("");
@@ -10,10 +12,18 @@ export default function TopMenu() {
     const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
     const [isAuthed, setIsAuthed] = useState<boolean>(false);
     const [showDropdown, setShowDropdown] = useState<boolean>(false);
+    const [userName, setUserName] = useState<string>("");
 
     const searchInputRef = useRef<HTMLInputElement>(null);
     const drawerRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const pathname = usePathname();
+    const isActive = (href: string, startsWith: boolean = false) => {
+        if (!pathname) return false;
+        if (href === "/") return pathname === "/";
+        return startsWith ? (pathname === href || pathname.startsWith(href + "/")) : pathname === href;
+    };
 
     const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
@@ -28,7 +38,18 @@ export default function TopMenu() {
 
     useEffect(() => {
         const checkAuth = async () => {
-            setIsAuthed(await isAuthenticated());
+            const authed = await isAuthenticated();
+            setIsAuthed(authed);
+            if (authed) {
+                try {
+                    const res = await GetAccountInfo();
+                    // Expecting res?.data to have a 'full_name' or 'username' field
+                    const name = res?.data?.full_name || res?.data?.username || res?.data?.name || "";
+                    setUserName(name);
+                } catch {
+                    // ignore errors here; keep placeholder if needed
+                }
+            }
         };
 
         checkAuth();
@@ -103,13 +124,13 @@ export default function TopMenu() {
                 <nav
                     className={`hidden lg:flex items-center gap-x-[46px] text-primary font-medium text-base`}
                 >
-                    <Link className={`text-secondary`} href={`/`}>
+                    <Link className={`${isActive("/") ? "text-secondary" : ""}`} href={`/`}>
                         خانه
                     </Link>
-                    <Link href={`/shop?page=1&category=all`}>فروشگاه</Link>
-                    <Link href={`/about`}>درباره ما</Link>
-                    <Link href={`/contact`}>تماس با ما</Link>
-                    <Link href={`/blog`}>وبلاگ</Link>
+                    <Link className={`${isActive("/shop", true) ? "text-secondary" : ""}`} href={`/shop?page=1&category=all`}>فروشگاه</Link>
+                    <Link className={`${isActive("/about") ? "text-secondary" : ""}`} href={`/about`}>درباره ما</Link>
+                    <Link className={`${isActive("/contact") ? "text-secondary" : ""}`} href={`/contact`}>تماس با ما</Link>
+                    <Link className={`${isActive("/blog", true) ? "text-secondary" : ""}`} href={`/blog`}>وبلاگ</Link>
                 </nav>
 
                 {/* Desktop Right Section - hidden on mobile and tablet */}
@@ -201,7 +222,7 @@ export default function TopMenu() {
                                     className="flex items-center justify-center gap-x-2 cursor-pointer"
                                 >
                                     <div className="bg-primary size-10 rounded-full"></div>
-                                    <span>تستی</span>
+                                    <span>{userName || ""}</span>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="6"
@@ -389,31 +410,35 @@ export default function TopMenu() {
 
                     <nav className="flex flex-col gap-y-4 text-primary font-medium text-base mb-6">
                         <Link
-                            className={`text-secondary`}
+                            className={`${isActive("/") ? "text-secondary" : ""}`}
                             href={`/`}
                             onClick={() => setIsDrawerOpen(false)}
                         >
                             خانه
                         </Link>
                         <Link
+                            className={`${isActive("/shop", true) ? "text-secondary" : ""}`}
                             href={`/shop?page=1&category=all`}
                             onClick={() => setIsDrawerOpen(false)}
                         >
                             فروشگاه
                         </Link>
                         <Link
+                            className={`${isActive("/about") ? "text-secondary" : ""}`}
                             href={`/about`}
                             onClick={() => setIsDrawerOpen(false)}
                         >
                             درباره ما
                         </Link>
                         <Link
+                            className={`${isActive("/contact") ? "text-secondary" : ""}`}
                             href={`/contact`}
                             onClick={() => setIsDrawerOpen(false)}
                         >
                             تماس با ما
                         </Link>
                         <Link
+                            className={`${isActive("/blog", true) ? "text-secondary" : ""}`}
                             href={`/blog`}
                             onClick={() => setIsDrawerOpen(false)}
                         >
@@ -438,7 +463,7 @@ export default function TopMenu() {
                                     className="flex items-center justify-center gap-x-2 cursor-pointer"
                                 >
                                     <div className="bg-primary size-10 rounded-full"></div>
-                                    <span>تستی</span>
+                                    <span>{userName || ""}</span>
                                     <svg
                                         className="rotate-180"
                                         xmlns="http://www.w3.org/2000/svg"

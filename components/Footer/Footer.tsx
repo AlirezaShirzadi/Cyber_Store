@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#E1E4FA]">
+        <footer className="bg-[#E1E4FA] pt-12">
             <Container>
                 <div
                     className={`flex flex-col lg:flex-row items-center justify-between mb-[85px]`}

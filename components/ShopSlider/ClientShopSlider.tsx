@@ -2,7 +2,8 @@
 
 import {Swiper, SwiperSlide} from "swiper/react";
 import Image from "next/image";
-import {EffectFade, Pagination} from 'swiper/modules';
+import Link from "next/link";
+import {EffectFade, Pagination, Autoplay} from 'swiper/modules';
 import {ShopSliderItem} from "@/types/shop/type";
 
 import 'swiper/css';
@@ -25,8 +26,9 @@ const svgs = [
 
 export default function ClientShopSlider({data}: { data: ShopSliderItem[] }) {
     return <Swiper
-        modules={[EffectFade, Pagination]}
+        modules={[EffectFade, Pagination, Autoplay]}
         slidesPerView={1}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         pagination={{
             el: ".custom-pagination",
             clickable: true,
@@ -37,10 +39,14 @@ export default function ClientShopSlider({data}: { data: ShopSliderItem[] }) {
         scrollbar={{draggable: true}}
         className={`swiper-shop`}
     >
-        {data?.map((item) => (<SwiperSlide key={'shop slider ' + item.product_id}>
-            <Image className={`h-[410px] object-contain`} src={item?.poster} alt={'shop slider ' + item.product_id}
-                   width={1920} height={410}/>
-        </SwiperSlide>))}
+        {data?.map((item) => (
+            <SwiperSlide key={'shop slider ' + item.product_id}>
+                <Link href={'/shop/' + item.product_id} className="block">
+                    <Image className={`h-[410px] object-contain`} src={item?.poster} alt={'shop slider ' + item.product_id}
+                           width={1920} height={410}/>
+                </Link>
+            </SwiperSlide>
+        ))}
 
         <div className="custom-pagination mt-4 mb-4 flex justify-center gap-4"></div>
     </Swiper>;

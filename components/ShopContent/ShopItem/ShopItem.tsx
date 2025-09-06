@@ -8,13 +8,13 @@ import Image from "next/image";
 export default function ShopItem({ item, view }: any) {
     return view === "items" ? (
         <div className={`col-span-12 md:col-span-6 lg:col-span-4`}>
-            <Link className="block h-[148px] mb-2.5" href={`/shop/${item?.id}`}>
+            <Link className="block h-[180px] mb-2.5" href={`/shop/${item?.id}`}>
                 <Image
                     className={`w-full h-full object-cover`}
                     src={item?.image}
                     alt={item?.title_fa}
                     width={250}
-                    height={148}
+                    height={180}
                 />
             </Link>
             <Link

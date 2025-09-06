@@ -30,42 +30,30 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
                                 </h1>
                                 <div className="flex justify-between items-center mb-[21px]">
                                     <div>
-                                        {!shopItemDetails?.data
-                                            ?.has_discount ? (
-                                            <div
-                                                className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4">
-                                                <span>
-                                                    {formatPrice(
-                                                        shopItemDetails?.data
-                                                            ?.price
-                                                    )}
-                                                </span>
-                                                <span>تومان</span>
-                                            </div>
-                                        ) : (
-                                            <div className="flex flex-wrap lg:flex-nowrap items-center lg:gap-10">
-                                                <div
-                                                    className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4 line-through text-black/50">
+                                        {!(typeof shopItemDetails?.data?.type === "string" && shopItemDetails?.data?.type?.toLowerCase()?.includes("account")) && (
+                                            !shopItemDetails?.data?.has_discount ? (
+                                                <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4">
                                                     <span>
-                                                        {formatPrice(
-                                                            shopItemDetails
-                                                                ?.data?.price
-                                                        )}
+                                                        {formatPrice(shopItemDetails?.data?.price)}
                                                     </span>
                                                     <span>تومان</span>
                                                 </div>
-                                                <div
-                                                    className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4">
-                                                    <span>
-                                                        {formatPrice(
-                                                            shopItemDetails
-                                                                ?.data
-                                                                ?.final_price
-                                                        )}
-                                                    </span>
-                                                    <span>تومان</span>
+                                            ) : (
+                                                <div className="flex flex-wrap lg:flex-nowrap items-center lg:gap-10">
+                                                    <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4 line-through text-black/50">
+                                                        <span>
+                                                            {formatPrice(shopItemDetails?.data?.price)}
+                                                        </span>
+                                                        <span>تومان</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-end shrink-0 lg:ms-4">
+                                                        <span>
+                                                            {formatPrice(shopItemDetails?.data?.final_price)}
+                                                        </span>
+                                                        <span>تومان</span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            )
                                         )}
                                     </div>
                                     <div className="flex justify-start items-center gap-2">
