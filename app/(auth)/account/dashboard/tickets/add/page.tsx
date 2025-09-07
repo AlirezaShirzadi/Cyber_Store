@@ -121,7 +121,7 @@ export default function AddTicketPage() {
     }, [file]);
 
     return (
-        <div className="bg-[#E1E4FA] min-h-dvh">
+        <div className="bg-[#E1E4FA] min-h-dvh pb-12">
             <Container className="grid grid-cols-12 gap-x-6 items-center min-h-dvh py-24 lg:py-0">
                 <div className="col-span-12 lg:col-span-3">
                     <div className="text-secondary text-2xl/[116%] font-extrabold">حساب کاربری من</div>

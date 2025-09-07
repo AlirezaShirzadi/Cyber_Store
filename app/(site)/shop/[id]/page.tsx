@@ -9,7 +9,6 @@ import {
     GetShopItemDetails,
 } from "@/services/Shop/service";
 import {formatPrice} from "@/utils/formatPrice";
-import Image from "next/image";
 import {ToastContainer} from "react-toastify";
 
 export default async function Page({params}: { params: Promise<{ id: string }> }) {
@@ -95,43 +94,18 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
                                 />
                             </div>
                             <div className="col-span-12 lg:col-span-6 mb-[21px] order-1 lg:order-2">
-                                <Image
-                                    className="object-cover mx-auto"
-                                    src={shopItemDetails?.data?.image}
-                                    alt={shopItemDetails?.data?.title_fa}
-                                    width={515}
-                                    height={515}
+                                <ShopItemSlider
+                                    data={[shopItemDetails?.data?.image, ...(shopItemDetails?.data?.galleries || [])]}
                                 />
                             </div>
                         </div>
                     </section>
 
-                    {(shopItemDetails?.data?.galleries?.length > 0 ||
-                        shopItemDetails?.data?.description) && (
+                    {shopItemDetails?.data?.description && (
                         <section className="pb-24 pt-4">
                             <div className="grid grid-cols-12 gap-6 items-center">
-                                {shopItemDetails?.data?.galleries?.length >
-                                    0 && (
-                                        <div
-                                            className={`col-span-12 ${
-                                                shopItemDetails?.data
-                                                    ?.description && "lg:col-span-6"
-                                            }`}
-                                        >
-                                            <ShopItemSlider
-                                                data={
-                                                    shopItemDetails?.data?.galleries
-                                                }
-                                            />
-                                        </div>
-                                    )}
                                 {shopItemDetails?.data?.description && (
-                                    <div
-                                        className={`col-span-12 ${
-                                            shopItemDetails?.data?.galleries
-                                                ?.length > 0 && "lg:col-span-6"
-                                        }`}
-                                    >
+                                    <div className="col-span-12">
                                         <h2 className="text-3xl lg:text-5xl/[64px] text-secondary mb-[21px] font-bold opacity-75">
                                             توضیحات
                                         </h2>
@@ -149,7 +123,7 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
                     )}
 
                     {relatedProducts?.data?.results?.length > 0 && (
-                        <section className="pb-24 pt-4 lg:py-[157px]">
+                        <section className="pb-6 pt-4 lg:py-12">
                             <h2 className="text-center text-3xl lg:text-5xl/[64px] text-secondary mb-[21px] font-bold opacity-75">
                                 محصولات پیشنهادی
                             </h2>

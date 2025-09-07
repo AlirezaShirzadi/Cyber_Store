@@ -71,7 +71,7 @@ export default function TicketDetailPage() {
 
 
   return (
-    <div className="bg-[#E1E4FA] min-h-dvh">
+    <div className="bg-[#E1E4FA] min-h-dvh pb-12">
       <Container className="min-h-dvh pt-[169px]">
         <div className="max-w-3xl mx-auto w-full space-y-4">
           <div className="text-secondary text-3xl lg:text-5xl font-bold">جزئیات تیکت</div>

@@ -140,7 +140,7 @@ export default function TopMenu() {
                     <div dir={`ltr`}>{currentTime}</div>
 
                     {/* Search Icon and Input */}
-                    <div className="relative">
+                    <div className="relative flex items-center">
                         {isSearchOpen ? (
                             <div
                                 className="flex items-center bg-white rounded-full overflow-hidden pr-2 pl-1 py-1 border border-primary">

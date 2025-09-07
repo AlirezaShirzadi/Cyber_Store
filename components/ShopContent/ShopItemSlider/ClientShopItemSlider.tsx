@@ -23,7 +23,7 @@ export default function ClientShopItemSlider({ data }: any) {
     };
 
     return (
-        <div className={`relative`}>
+        <div className={`relative w-full max-w-[515px] mx-auto`}>
             <Swiper
                 onSwiper={setMainSwiper}
                 onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
@@ -55,37 +55,39 @@ export default function ClientShopItemSlider({ data }: any) {
                 })}
             </Swiper>
             <div
-                className={`absolute bottom-[30px] left-0 right-0 w-full z-10`}
+                className={`absolute bottom-[30px] left-0 right-0 w-full z-10 pointer-events-auto`}
             >
-                <Swiper
-                    onSwiper={setThumbsSwiper}
-                    loop={true}
-                    spaceBetween={25}
-                    slidesPerView={"auto"}
-                    freeMode={true}
-                    watchSlidesProgress={true}
-                    modules={[FreeMode, Thumbs]}
-                    className={`swiper-gallery1`}
-                >
-                    {data?.map((item: any, index: number) => {
-                        return (
-                            <SwiperSlide
-                                className={`size-[69px]!`}
-                                key={"thumbnail gallery" + index}
-                                onClick={() => handleThumbnailClick(index)}
-                            >
-                                <Image
-                                    className={`rounded-[3px] size-[69px] object-cover cursor-pointer mx-auto border ${activeIndex === index ? 'border-[#BBC1EF]':'border-gray-200'}`}
-                                    src={item}
-                                    alt={"thumbnail gallery" + index}
-                                    width={69}
-                                    height={69}
-                                    sizes="(max-width: 640px) 100px, 200px"
-                                />
-                            </SwiperSlide>
-                        );
-                    })}
-                </Swiper>
+                <div className="w-full max-w-[515px] mx-auto overflow-x-auto overflow-y-visible">
+                    <Swiper
+                        onSwiper={setThumbsSwiper}
+                        loop={false}
+                        spaceBetween={12}
+                        slidesPerView={"auto"}
+                        freeMode={true}
+                        watchSlidesProgress={true}
+                        modules={[FreeMode, Thumbs]}
+                        className={`swiper-gallery1 w-max`}
+>
+                        {data?.map((item: any, index: number) => {
+                            return (
+                                <SwiperSlide
+                                    className={`size-[69px]!`}
+                                    key={"thumbnail gallery" + index}
+                                    onClick={() => handleThumbnailClick(index)}
+                                >
+                                    <Image
+                                        className={`rounded-[3px] size-[69px] object-cover cursor-pointer mx-auto border ${activeIndex === index ? 'border-[#BBC1EF]':'border-gray-200'}`}
+                                        src={item}
+                                        alt={"thumbnail gallery" + index}
+                                        width={69}
+                                        height={69}
+                                        sizes="(max-width: 640px) 100px, 200px"
+                                    />
+                                </SwiperSlide>
+                            );
+                        })}
+                    </Swiper>
+                </div>
             </div>
         </div>
     );
