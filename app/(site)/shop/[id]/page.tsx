@@ -10,7 +10,9 @@ import {
 } from "@/services/Shop/service";
 import {formatPrice} from "@/utils/formatPrice";
 import {ToastContainer} from "react-toastify";
-
+// import dynamic from "next/dynamic";
+// const CommentForm = dynamic(() => import("@/components/ShopContent/CommentForm/CommentForm"), { ssr: false });
+import CommentForm from "@/components/ShopContent/CommentForm/CommentForm"
 export default async function Page({params}: { params: Promise<{ id: string }> }) {
     const {id} = await params;
 
@@ -147,6 +149,16 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
                             </div>
                         </section>
                     )}
+
+                    {/* Comment form section */}
+                    <section className="pb-12 pt-4">
+                        <h2 className="text-center text-2xl lg:text-4xl text-secondary mb-6 font-bold opacity-75">
+                            نظر خود را ثبت کنید
+                        </h2>
+                        <div className="max-w-3xl mx-auto">
+                            <CommentForm productId={Number(id)} />
+                        </div>
+                    </section>
 
                     {shopItemDetails?.data?.comments?.length > 0 && (
                         <section className="pb-24 pt-4">

@@ -34,6 +34,10 @@ const endpoints = {
             url: (id: string) => `/product/related/${id}`,
             method: `GET`,
         },
+        post_comment: {
+            url: () => `/product/post-comment/`,
+            method: `POST`,
+        },
     },
     search: {
         filters: {
