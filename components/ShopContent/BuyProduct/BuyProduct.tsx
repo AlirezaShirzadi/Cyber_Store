@@ -11,16 +11,18 @@ export default function BuyProduct({
     id,
     is_available,
     type,
-    feature,
+    variants,
 }: any) {
     const [isAuthed, setIsAuthed] = useState<boolean>(false);
     const isAccountType =
         typeof type === "string" && type.toLowerCase().includes("account");
+    // Support both new `variants` and legacy `feature` prop names by normalizing to `list`
+    const list = Array.isArray(variants) ? variants : [];
     const [productIdSelected, setProductIdSelected] = useState(
-        isAccountType ? feature?.[0]?.id?.toString() ?? "0" : "0"
+        isAccountType ? list?.[0]?.id?.toString() ?? "0" : "0"
     );
-    const selectedFeature = isAccountType
-        ? feature?.find((f: any) => String(f?.id) === String(productIdSelected))
+    const selectedVariant = isAccountType
+        ? list?.find((f: any) => String(f?.id) === String(productIdSelected))
         : null;
 
     useEffect(() => {
@@ -48,21 +50,21 @@ export default function BuyProduct({
 
     return isAuthed ? (
         <>
-            {isAccountType && selectedFeature && (
+            {isAccountType && selectedVariant && (
                 <div className="mb-3">
-                    {!selectedFeature?.has_discount ? (
+                    {(!(selectedVariant as any)?.has_discount && (selectedVariant?.final_price == null || selectedVariant?.final_price === selectedVariant?.price)) ? (
                         <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-start shrink-0 lg:ms-4">
-                            <span>{formatPrice(selectedFeature?.price)}</span>
+                            <span>{formatPrice(selectedVariant?.price)}</span>
                             <span>تومان</span>
                         </div>
                     ) : (
                         <div className="flex flex-wrap lg:flex-nowrap items-center lg:gap-10">
                             <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-start shrink-0 lg:ms-4 line-through text-black/50">
-                                <span>{formatPrice(selectedFeature?.price)}</span>
+                                <span>{formatPrice(selectedVariant?.price)}</span>
                                 <span>تومان</span>
                             </div>
                             <div className="flex items-center gap-1 mt-1 text-sm font-medium justify-start shrink-0 lg:ms-4">
-                                <span>{formatPrice(selectedFeature?.final_price)}</span>
+                                <span>{formatPrice(selectedVariant?.final_price ?? selectedVariant?.price)}</span>
                                 <span>تومان</span>
                             </div>
                         </div>
@@ -81,11 +83,11 @@ export default function BuyProduct({
             </button>
             {isAccountType && (
                 <div className="flex items-center gap-4 mt-4">
-                    {feature?.map((item: any) => (
-                        <div key={"feature" + item?.id}>
+                    {list?.map((item: any) => (
+                        <div key={"variant" + item?.id}>
                             <input
-                                id={"feature" + item?.id}
-                                name="feature"
+                                id={"variant" + item?.id}
+                                name="variant"
                                 type="radio"
                                 value={item?.id}
                                 defaultChecked={String(productIdSelected) === String(item?.id)}
@@ -94,9 +96,9 @@ export default function BuyProduct({
                                 }}
                             />
                             <label
-                                htmlFor={"feature" + item?.id}
+                                htmlFor={"variant" + item?.id}
                                 className="ms-2 text-sm"
-                            >{`ظرفیت ${item?.capacity}`}</label>
+                            >{item?.name ?? `گزینه ${item?.id}`}{item?.console_type ? ` - ${item.console_type}` : ""}</label>
                         </div>
                     ))}
                 </div>

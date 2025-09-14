@@ -92,7 +92,7 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
                                         shopItemDetails?.data?.is_available
                                     }
                                     type={shopItemDetails?.data?.type}
-                                    feature={shopItemDetails?.data?.feature}
+                                    variants={shopItemDetails?.data?.variants || shopItemDetails?.data?.feature}
                                 />
                             </div>
                             <div className="col-span-12 lg:col-span-6 mb-[21px] order-1 lg:order-2">
@@ -102,6 +102,50 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
                             </div>
                         </div>
                     </section>
+
+                    {/* Specifications / Features section */}
+                    {(() => {
+                        const specs = shopItemDetails?.data?.specifications as any;
+                        // Normalize specs to array of [key, value]
+                        let entries: Array<{ key: string; value: any }> = [];
+                        if (specs && typeof specs === "object") {
+                            if (Array.isArray(specs)) {
+                                entries = specs
+                                    .map((it: any) => {
+                                        if (!it) return null;
+                                        const k = it.key ?? it.name ?? it.title ?? it.label;
+                                        const v = it.value ?? it.val ?? it.content ?? it.description ?? it.desc;
+                                        if (k == null || v == null || String(v).trim() === "") return null;
+                                        return { key: String(k), value: v };
+                                    })
+                                    .filter(Boolean) as Array<{ key: string; value: any }>;
+                            } else {
+                                entries = Object.entries(specs)
+                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                    .filter(([_, v]) => v != null && String(v).trim() !== "")
+                                    .map(([k, v]) => ({ key: String(k), value: v }));
+                            }
+                        }
+                        return entries.length > 0 ? (
+                            <section className="pb-24 pt-4">
+                                <h2 className="text-3xl lg:text-5xl/[64px] text-secondary mb-[21px] font-bold opacity-75">
+                                    مشخصات محصول
+                                </h2>
+                                <div className="grid grid-cols-12 gap-6">
+                                    {entries.map((item, idx) => (
+                                        <div key={`spec-${idx}`} className="col-span-12 md:col-span-6 lg:col-span-4">
+                                            <div className="border border-[#BBC1EF] rounded-3xl py-[13px] px-[14px] h-full">
+                                                <div className="flex items-start justify-between gap-3">
+                                                    <span className="text-sm font-semibold text-secondary line-clamp-2">{item.key}</span>
+                                                    <span className="text-sm text-secondary/80 text-left break-words line-clamp-3">{String(item.value)}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        ) : null;
+                    })()}
 
                     {shopItemDetails?.data?.description && (
                         <section className="pb-24 pt-4">
