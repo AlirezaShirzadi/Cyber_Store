@@ -106,6 +106,13 @@ export default function Account() {
         }
     }, []);
 
+    // Keep OTP form's phone in sync with latest phone value when entering OTP step or when phone changes
+    useEffect(() => {
+        if (isOtpStep && phone) {
+            otpSetValue("phone", phone, { shouldValidate: false, shouldDirty: false });
+        }
+    }, [isOtpStep, phone, otpSetValue]);
+
     return (
         <div className="bg-secondary min-h-dvh">
             <div className="container mx-auto pt-[86px]">
@@ -317,9 +324,10 @@ export default function Account() {
                                                     required:
                                                         "وارد کردن نام الزامی است",
                                                     pattern: {
-                                                        value: /^[\u0600-\u06FF\s]+$/,
+                                                        // Allow Persian and English letters, spaces, apostrophes and hyphens
+                                                        value: /^[\u0600-\u06FFA-Za-z\s'\-]+$/,
                                                         message:
-                                                            "نام باید به زبان فارسی باشد",
+                                                            "نام باید فقط شامل حروف فارسی یا انگلیسی باشد",
                                                     },
                                                     maxLength: {
                                                         value: 50,

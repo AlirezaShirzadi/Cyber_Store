@@ -38,6 +38,10 @@ const endpoints = {
             url: () => `/product/post-comment/`,
             method: `POST`,
         },
+        comments: {
+            url: () => `/product/comments/`,
+            method: `GET`,
+        },
     },
     search: {
         filters: {

@@ -81,3 +81,18 @@ export async function GetRelatedProducts(id: string) {
         throw error;
     }
 }
+
+export async function GetProductComments(product_id: number | string, page = 1, page_size = 10) {
+    try {
+        const response = await axiosInstance({
+            url: endpoints.shop.comments.url(),
+            method: endpoints.shop.comments.method,
+            params: { product_id, page, page_size }
+        });
+        if (response) return response;
+        throw new Error('Empty response');
+    } catch (error) {
+        console.error('Failed to fetch product comments:', error);
+        throw error;
+    }
+}

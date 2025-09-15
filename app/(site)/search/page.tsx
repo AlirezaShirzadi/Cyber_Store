@@ -40,11 +40,11 @@ export default async function Page({
         <div className={`bg-[#E1E4FA] min-h-dvh`}>
             <Container>
                 <section className="pt-[86px]">
+                    <h1 className="mb-[28px] text-lg lg:text-5xl text-secondary font-bold line-clamp-1">
+                        {params?.query}
+                    </h1>
                     <div className="grid grid-cols-12 gap-6">
                         <div className="col-span-12 md:col-span-4 lg:col-span-6 xl:col-span-3">
-                            <h1 className="mb-[28px] text-5xl text-secondary font-bold">
-                                {params?.query}
-                            </h1>
                             <Search filters={filters?.data} params={params}/>
                         </div>
                         <div className="col-span-12 md:col-span-8 lg:col-span-6 xl:col-span-9 mb-8">

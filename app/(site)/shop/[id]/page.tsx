@@ -3,7 +3,7 @@ import BuyProduct from "@/components/ShopContent/BuyProduct/BuyProduct";
 import RelatedProductsSlider from "@/components/ShopContent/RelatedProductsSlider/RelatedProductsSlider";
 import ShopItem from "@/components/ShopContent/ShopItem/ShopItem";
 import ShopItemSlider from "@/components/ShopContent/ShopItemSlider/ShopItemSlider";
-import TestimonialItem from "@/components/TestimonialItem/TestimonialItem";
+import ProductCommentsList from "@/components/ShopContent/ProductCommentsList/ProductCommentsList";
 import {
     GetRelatedProducts,
     GetShopItemDetails,
@@ -135,7 +135,7 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
                                     {entries.map((item, idx) => (
                                         <div key={`spec-${idx}`} className="col-span-12 md:col-span-6 lg:col-span-4">
                                             <div className="border border-[#BBC1EF] rounded-3xl py-[13px] px-[14px] h-full">
-                                                <div className="flex items-start justify-between gap-3">
+                                                <div className="flex flex-wrap items-start justify-between gap-3">
                                                     <span className="text-sm font-semibold text-secondary line-clamp-2">{item.key}</span>
                                                     <span className="text-sm text-secondary/80 text-left break-words line-clamp-3">{String(item.value)}</span>
                                                 </div>
@@ -204,25 +204,8 @@ export default async function Page({params}: { params: Promise<{ id: string }> }
                         </div>
                     </section>
 
-                    {shopItemDetails?.data?.comments?.length > 0 && (
-                        <section className="pb-24 pt-4">
-                            <h2 className="text-center text-3xl lg:text-5xl/[64px] text-secondary mb-[70px] font-bold opacity-75">
-                                بازخورد های شما عزیزان
-                            </h2>
-                            <div className="grid grid-cols-12 gap-6">
-                                {shopItemDetails?.data?.comments?.map(
-                                    (item: any) => {
-                                        return (
-                                            <TestimonialItem
-                                                key={"testimonial " + id + item}
-                                                item={item}
-                                            />
-                                        );
-                                    }
-                                )}
-                            </div>
-                        </section>
-                    )}
+                    {/* Comments List fetched from /product/comments/ with lazy load */}
+                    <ProductCommentsList productId={Number(id)} />
                 </Container>
             </div>
             <ToastContainer/>

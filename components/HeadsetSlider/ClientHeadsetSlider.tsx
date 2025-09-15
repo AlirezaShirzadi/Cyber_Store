@@ -60,7 +60,7 @@ export default function ClientHeadsetSlider({ data }: any) {
                     }
                     className="main-headset-slider"
                 >
-                    {data?.map((item: any) => (
+                    {data?.map((item: any, index: number) => (
                         <SwiperSlide className={`pb-5`} key={item?.product_id}>
                             <div className="grid grid-cols-12 gap-6">
                                 <div
@@ -134,7 +134,7 @@ export default function ClientHeadsetSlider({ data }: any) {
                                     <div className={`text-center`}>
                                         <Image
                                             className={`inline-block rounded-full shadow-item mb-[30px]`}
-                                            src={process.env.NEXT_PUBLIC_BASE_URL + item?.poster}
+                                            src={item?.poster}
                                             alt={`headset`}
                                             width={356}
                                             height={356}
@@ -151,7 +151,7 @@ export default function ClientHeadsetSlider({ data }: any) {
                                             >
                                                 <path
                                                     d="M5.23424 0.872559L10.0195 9.43766L14.8472 0.872559H19.4631L12.7016 11.8726L19.5195 22.8726H14.9036L10.0195 14.6512L5.14955 22.8726H0.519531L7.26693 11.8726L0.604227 0.872559H5.23424Z"
-                                                    fill="#112B46"
+                                                    fill={index === 0 ? "#112B46" : "#7673D5"}
                                                 />
                                             </svg>
                                             <svg
@@ -163,7 +163,7 @@ export default function ClientHeadsetSlider({ data }: any) {
                                             >
                                                 <path
                                                     d="M13.0195 0.872559L25.5195 22.8726H0.519531L13.0195 0.872559Z"
-                                                    fill="#7673D5"
+                                                    fill={index === 1 ? "#112B46" : "#7673D5"}
                                                 />
                                             </svg>
                                             <svg
@@ -177,7 +177,7 @@ export default function ClientHeadsetSlider({ data }: any) {
                                                     cx="11.5195"
                                                     cy="11.8726"
                                                     r="11"
-                                                    fill="#7673D5"
+                                                    fill={index === 2 ? "#112B46" : "#7673D5"}
                                                 />
                                             </svg>
                                         </div>

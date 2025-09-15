@@ -34,6 +34,10 @@ const CommentForm: React.FC<Props> = ({ productId, onSuccess }) => {
       toast.error("لطفا نظر خود را وارد کنید");
       return;
     }
+    if (rating === 0) {
+      toast.error("لطفا امتیاز خود را وارد کنید");
+      return;
+    }
     if (rating < 0 || rating > 5) {
       toast.error("امتیاز باید بین 0 تا 5 باشد");
       return;
@@ -75,18 +79,11 @@ const CommentForm: React.FC<Props> = ({ productId, onSuccess }) => {
       <div className="flex items-center gap-2 mb-4">
         <span className="text-sm text-secondary/70">امتیاز شما:</span>
         <div className="flex items-center gap-1">
-          {Array.from({length:6}).map((_,i)=>{
-            const value = i; // 0..5
-            if (value===0) {
-              return (
-                <button key="zero" type="button" className={`text-xs px-2 py-1 rounded-full border ${current===0?"bg-[#112B46] text-white border-[#112B46]":"border-[#BBC1EF] text-secondary/70"}`} onClick={()=>setRating(0)} onMouseEnter={()=>setHover(0)} onMouseLeave={()=>setHover(null)}>
-                  0
-                </button>
-              );
-            }
+          {Array.from({ length: 5 }).map((_, i) => {
+            const value = i + 1; // 1..5
             const filled = current >= value;
             return (
-              <Star key={i} filled={filled} onClick={()=>setRating(value)} onMouseEnter={()=>setHover(value)} onMouseLeave={()=>setHover(null)} />
+              <Star key={value} filled={filled} onClick={() => setRating(value)} onMouseEnter={() => setHover(value)} onMouseLeave={() => setHover(null)} />
             );
           })}
         </div>
