@@ -1,28 +1,81 @@
+"use client";
 import Container from "@/components/Container/Container";
+import React, { useState } from "react";
+import axiosInstance from "@/services/AxiosInstance/axiosIntance";
+import { toast } from "react-toastify";
 
-export default async function Page() {
+export default function Page() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [message, setMessage] = useState("");
+    const [errors, setErrors] = useState<{[k:string]: string}>({});
+    const [loading, setLoading] = useState(false);
+
+    function validate() {
+        const e: {[k:string]: string} = {};
+        if (!name.trim()) e.name = "نام الزامی است";
+        if (!email.trim()) e.email = "ایمیل الزامی است";
+        else if (!/^\S+@\S+\.\S+$/.test(email.trim())) e.email = "ایمیل نامعتبر است";
+        if (!phone.trim()) e.phone = "شماره تماس الزامی است";
+        else if (!/^0\d{10}$/.test(phone.trim())) e.phone = "شماره تماس نامعتبر است";
+        if (!message.trim()) e.message = "پیام الزامی است";
+        else if (message.trim().length < 5) e.message = "متن پیام خیلی کوتاه است";
+        setErrors(e);
+        return Object.keys(e).length === 0;
+    }
+
+    async function onSubmit(ev: React.FormEvent) {
+        ev.preventDefault();
+        if (!validate()) return;
+        try {
+            setLoading(true);
+            await axiosInstance.post("/contact/create/", {
+                name: name.trim(),
+                email: email.trim(),
+                phone_number: phone.trim(),
+                message: message.trim(),
+            });
+            toast.success("پیام شما با موفقیت ارسال شد");
+            setName("");
+            setEmail("");
+            setPhone("");
+            setMessage("");
+            setErrors({});
+        } catch (error: any) {
+            const msg = error?.response?.data?.message || error?.response?.data?.detail || error?.message || "ارسال پیام با خطا مواجه شد";
+            toast.error(msg);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return <div className={`bg-secondary min-h-dvh`}>
         <Container>
             <section className={`pt-[175px] text-center text-white`}>
                 <h1 className={`text-3xl lg:text-5xl font-bold mb-[28px]`}>فرم تماس با ما</h1>
-                <form className={`w-full max-w-[422px] mx-auto space-y-[28px]`}>
-                    <div className={`flex flex-col gap-y-[11px]`}>
+                <form onSubmit={onSubmit} className={`w-full max-w-[422px] mx-auto space-y-[18px]`}>
+                    <div className={`flex flex-col gap-y-[8px]`}>
                         <label>ایمیل</label>
-                        <input className={`border border-[#BBC1EF] rounded-[7px] py-[6px] mx-2.5`} type="text"/>
+                        <input value={email} onChange={e=>setEmail(e.target.value)} placeholder="example@mail.com" className={`border border-[#BBC1EF] rounded-[7px] py-[6px] mx-2.5 px-3 text-white`} type="email"/>
+                        {errors.email && <span className="text-red-400 text-sm">{errors.email}</span>}
                     </div>
-                    <div className={`flex flex-col gap-y-[11px]`}>
+                    <div className={`flex flex-col gap-y-[8px]`}>
                         <label>نام</label>
-                        <input className={`border border-[#BBC1EF] rounded-[7px] py-[6px] mx-2.5`} type="text"/>
+                        <input value={name} onChange={e=>setName(e.target.value)} placeholder="نام و نام خانوادگی" className={`border border-[#BBC1EF] rounded-[7px] py-[6px] mx-2.5 px-3 text-white`} type="text"/>
+                        {errors.name && <span className="text-red-400 text-sm">{errors.name}</span>}
                     </div>
-                    <div className={`flex flex-col gap-y-[11px]`}>
+                    <div className={`flex flex-col gap-y-[8px]`}>
                         <label>شماره تماس</label>
-                        <input className={`border border-[#BBC1EF] rounded-[7px] py-[6px] mx-2.5`} type="text"/>
+                        <input value={phone} onChange={e=>setPhone(e.target.value)} placeholder="09123456789" className={`border border-[#BBC1EF] rounded-[7px] py-[6px] mx-2.5 px-3 text-white ltr`} type="tel"/>
+                        {errors.phone && <span className="text-red-400 text-sm">{errors.phone}</span>}
                     </div>
-                    <div className={`flex flex-col gap-y-[11px]`}>
-                        <label>موضوع سوال</label>
-                        <input className={`border border-[#BBC1EF] rounded-[7px] py-[6px] mx-2.5`} type="text"/>
+                    <div className={`flex flex-col gap-y-[8px]`}>
+                        <label>پیام</label>
+                        <textarea value={message} onChange={e=>setMessage(e.target.value)} placeholder="متن پیام شما..." className={`border border-[#BBC1EF] rounded-[7px] py-[6px] mx-2.5 px-3 text-white min-h-[120px]`} />
+                        {errors.message && <span className="text-red-400 text-sm">{errors.message}</span>}
                     </div>
-                    <button className={`bg-primary w-full py-2.5 rounded-[7px]`} type={`submit`}>ثبت</button>
+                    <button disabled={loading} className={`bg-primary w-full py-2.5 rounded-[7px] disabled:opacity-60`} type={`submit`}>{loading?"در حال ارسال...":"ثبت"}</button>
                 </form>
             </section>
             <section className={`relative mt-[175px] bg-secondary`}>

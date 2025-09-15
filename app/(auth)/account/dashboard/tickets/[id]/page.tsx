@@ -95,7 +95,9 @@ export default function TicketDetailPage() {
                 <ChatThread messages={detail.messages} firstSender={participants.first ?? undefined} />
               </div>
 
-              <MessageComposer ticketId={ticketId} onSent={fetchDetail} />
+              {detail.status !== "closed" && (
+                <MessageComposer ticketId={ticketId} onSent={fetchDetail} />
+              )}
             </>
           )}
         </div>

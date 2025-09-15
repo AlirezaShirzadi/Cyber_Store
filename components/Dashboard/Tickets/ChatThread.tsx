@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { formatTehranTimeHM } from "./utils";
+import { formatTehranDateTimeShamsi } from "./utils";
 
 interface MessageItem {
   sender: string;
@@ -25,7 +25,7 @@ export default function ChatThread({ messages, firstSender }: ChatThreadProps) {
             <div key={idx} className={`flex ${isFirst ? "justify-end" : "justify-start"}`}>
               <div className={`max-w-[85%] rounded-[7px] p-3 border ${isFirst ? "bg-[#F0F5FF] border-[#BBC1EF]" : "bg-[#F9FAFF] border-[#D9DEF8]"}`}>
                 <div className="text-xs text-gray-500 mb-1">
-                  {m.sender} • {formatTehranTimeHM(m.created_at)}
+                  {m.sender} • {formatTehranDateTimeShamsi(m.created_at)}
                 </div>
                 <div className="text-secondary text-sm whitespace-pre-wrap">{m.content}</div>
                 {m.attachment?.file && (
