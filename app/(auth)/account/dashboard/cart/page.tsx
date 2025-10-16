@@ -41,7 +41,7 @@ export default function Page() {
 
     const getCartHasPhysicalItems = async () => {
         const response = await GetCartHasPhysicalProduct();
-        if (!response?.data?.has_valid_address) {
+        if (!response?.data?.has_valid_address && response?.data?.has_physical_product) {
             toast.info(response?.detail);
             router.push('/account/dashboard/address');
         } else if (response?.data?.has_address && response?.data?.has_valid_address) {

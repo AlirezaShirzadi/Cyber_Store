@@ -114,22 +114,6 @@ export default function Page() {
                         <span className={` text2xl font-extrabold`}>تلفن همراه</span>
                         <span>092245818020</span>
                     </div>
-                    <div className={`flex items-center justify-between`}>
-                        <span className={` text2xl font-extrabold`}>تلفن همراه</span>
-                        <span>092245818020</span>
-                    </div>
-                    <div className={`flex items-center justify-between`}>
-                        <span className={` text2xl font-extrabold`}>تلفن همراه</span>
-                        <span>092245818020</span>
-                    </div>
-                    <div className={`flex items-center justify-between`}>
-                        <span className={` text2xl font-extrabold`}>تلفن همراه</span>
-                        <span>092245818020</span>
-                    </div>
-                    <div className={`flex items-center justify-between`}>
-                        <span className={` text2xl font-extrabold`}>تلفن همراه</span>
-                        <span>092245818020</span>
-                    </div>
                 </div>
             </section>
         </Container>
