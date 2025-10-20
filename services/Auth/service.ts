@@ -1,6 +1,6 @@
 import endpoints from "@/constants/endpoints";
 import axiosInstance from "../AxiosInstance/axiosIntance";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 
 export async function RequestOtp(data: { phone: string; scope: string }) {
     try {
@@ -19,7 +19,7 @@ export async function RequestOtp(data: { phone: string; scope: string }) {
         }
     } catch (error: any) {
         if (error?.status === 400) {
-            toast.error("شماره همراه قبلا ثبت شده است");
+            toast.error(error?.response?.data?.detail);
         }
         console.error("Error requesting OTP:", error);
     }
@@ -88,7 +88,7 @@ async function refreshToken() {
             }
         );
 
-        const { access, refresh } = response.data;
+        const {access, refresh} = response.data;
 
         if (access && refresh) {
             localStorage.setItem("access_token", access);
