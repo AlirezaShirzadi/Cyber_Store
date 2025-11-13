@@ -2,7 +2,11 @@
 
 import CartItem from "@/components/Cart/CartItem/CartItem";
 import Container from "@/components/Container/Container";
-import { GetCartDetails, GetCartHasPhysicalProduct, GetDiscountCart } from "@/services/Cart/service";
+import {
+    GetCartDetails,
+    GetCartHasPhysicalProduct,
+    GetDiscountCart,
+} from "@/services/Cart/service";
 import { Checkout } from "@/services/Payment/service";
 import { formatPrice } from "@/utils/formatPrice";
 import React, { useEffect, useState } from "react";
@@ -41,24 +45,31 @@ export default function Page() {
 
     const getCartHasPhysicalItems = async () => {
         const response = await GetCartHasPhysicalProduct();
-        if (!response?.data?.has_valid_address && response?.data?.has_physical_product) {
+        if (
+            !response?.data?.has_valid_address &&
+            response?.data?.has_physical_product
+        ) {
             toast.info(response?.detail);
-            router.push('/account/dashboard/address');
-        } else if (response?.data?.has_address && response?.data?.has_valid_address) {
+            router.push("/account/dashboard/address");
+        } else if (
+            (response?.data?.has_address &&
+                response?.data?.has_valid_address) ||
+            !response?.data?.has_physical_product
+        ) {
             // Proceed to checkout when addresses are valid
             const checkout = await Checkout(discountCode);
             if (checkout?.detail) {
                 toast.success(checkout.detail);
             }
             if (checkout?.url) {
-                if (typeof window !== 'undefined') {
+                if (typeof window !== "undefined") {
                     window.location.href = checkout.url as string;
                 } else {
                     router.push(checkout.url as string);
                 }
             }
         }
-    }
+    };
 
     const getDiscountCartDetails = async (discountCode?: string) => {
         const response = await GetDiscountCart(discountCode);
@@ -80,7 +91,7 @@ export default function Page() {
     }, [discountCode]);
 
     return (
-            <>
+        <>
             <div className="bg-[#E1E4FA] min-h-dvh">
                 <Container className="pt-[169px]">
                     <div className="grid grid-cols-12 gap-6 min-h-dvh">
@@ -93,19 +104,15 @@ export default function Page() {
                                     <div>سبد خرید شما خالی است</div>
                                 ) : (
                                     <div className="flex flex-col gap-10 py-[39px] ps-[25px] pe-[30px] w-full">
-                                        {cart?.items?.map(
-                                            (item: any) => {
-                                                return (
-                                                    <CartItem
-                                                        key={item?.product_id}
-                                                        item={item}
-                                                        refreshCart={
-                                                            getCartDetails
-                                                        }
-                                                    />
-                                                );
-                                            }
-                                        )}
+                                        {cart?.items?.map((item: any) => {
+                                            return (
+                                                <CartItem
+                                                    key={item?.product_id}
+                                                    item={item}
+                                                    refreshCart={getCartDetails}
+                                                />
+                                            );
+                                        })}
                                     </div>
                                 )}
                             </div>
@@ -194,14 +201,28 @@ export default function Page() {
                                             </span>
                                         </form>
                                         <div className="flex items-center justify-between w-full">
-                                            {cart?.summary?.all_in_stock ?
-                                                <Link className={'w-full'} onClick={getCartHasPhysicalItems} href={'#'}>
+                                            {cart?.summary?.all_in_stock ? (
+                                                <Link
+                                                    className={"w-full"}
+                                                    onClick={
+                                                        getCartHasPhysicalItems
+                                                    }
+                                                    href={"#"}
+                                                >
                                                     <div
-                                                        className={'bg-primary w-full rounded-[7px] py-[7px] px-3.5 text-white text-center'}>
+                                                        className={
+                                                            "bg-primary w-full rounded-[7px] py-[7px] px-3.5 text-white text-center"
+                                                        }
+                                                    >
                                                         تکمیل سفارش
                                                     </div>
-                                                </Link> : <div className={'text-red-500'}>امکان تکمیل سبد خرید شما وجود
-                                                    ندارد</div>}
+                                                </Link>
+                                            ) : (
+                                                <div className={"text-red-500"}>
+                                                    امکان تکمیل سبد خرید شما
+                                                    وجود ندارد
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 )}
@@ -210,7 +231,7 @@ export default function Page() {
                     </div>
                 </Container>
             </div>
-            <ToastContainer/>
-            </>
+            <ToastContainer />
+        </>
     );
 }
